@@ -7,9 +7,9 @@ var updatedValue = ""
 const addTask = document.querySelector('.input-task')
 addTask.addEventListener('input', function (e) {
     updatedValue = e.target.value
-    // console.log(e.target.value)
 })
 
+// add task 
 btn.addEventListener("click", function (e) {
     e.preventDefault()
 
@@ -17,6 +17,7 @@ btn.addEventListener("click", function (e) {
     console.log('the task to be created ', typedValue)
 
     const newTask = document.createElement('div')
+    newTask.setAttribute('class', 'task')
 
     const checkbox = document.createElement('input')
     checkbox.setAttribute('type', 'checkbox')
@@ -38,9 +39,21 @@ btn.addEventListener("click", function (e) {
 
 })
 
+// delete task 
 taskList.addEventListener('click', function (e) {
     if (e.target.className == 'task-delete-button') {
         const li = e.target.parentNode
         li.parentNode.removeChild(li)
     }
+})
+
+var clearAllButton = document.querySelector('.clear-all-button')
+
+clearAllButton.addEventListener('click', function (e) {
+    let taskList = document.querySelectorAll('.task')
+    taskList = Array.from(taskList)
+
+    taskList.forEach(function (val) {
+        val.parentElement.removeChild(val)
+    })
 })
