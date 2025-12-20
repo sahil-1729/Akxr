@@ -37,3 +37,10 @@ btn.addEventListener("click", function (e) {
     addTask.value = ""
 
 })
+
+taskList.addEventListener('click', function (e) {
+    if (e.target.className == 'task-delete-button') {
+        const li = e.target.parentNode
+        li.parentNode.removeChild(li)
+    }
+})
