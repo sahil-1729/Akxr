@@ -2,3 +2,14 @@
     background-color: black;
     color: white;
 } */
+
+.counter-completed{
+    display: flex;
+    flex-direction: row;
+
+}
+.counter-total{
+    display: flex;
+    flex-direction: row;
+    
+}
