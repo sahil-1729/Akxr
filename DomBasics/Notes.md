@@ -234,7 +234,7 @@ BETTER WAY TO DELETE
     list.appendChild(li)
 })
 
-### adding classes to the element in JS DOM
+### adding classes styles to the element in JS DOM
 - li.style.color = "red"
 - li.style.<jo bhi style attribute>
 - li.style.marginTop = "60px"

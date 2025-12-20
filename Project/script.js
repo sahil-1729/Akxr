@@ -20,6 +20,7 @@ btn.addEventListener("click", function (e) {
     newTask.setAttribute('class', 'task')
 
     const checkbox = document.createElement('input')
+    checkbox.setAttribute('class', 'task-checkbox')
     checkbox.setAttribute('type', 'checkbox')
 
     const taskName = document.createElement('label')
@@ -41,14 +42,23 @@ btn.addEventListener("click", function (e) {
 
 // delete task 
 taskList.addEventListener('click', function (e) {
-    if (e.target.className == 'task-delete-button') {
+    if (e.target.className === 'task-delete-button') {
         const li = e.target.parentNode
         li.parentNode.removeChild(li)
+    } else if (e.target.className === "task-checkbox") {
+        const task = e.target.nextSibling
+
+        if (e.target.checked) {
+            task.style.textDecoration = 'line-through'
+            console.log(task)
+        } else {
+            task.style.textDecoration = ''
+        }
     }
 })
 
+// clear all task 
 var clearAllButton = document.querySelector('.clear-all-button')
-
 clearAllButton.addEventListener('click', function (e) {
     let taskList = document.querySelectorAll('.task')
     taskList = Array.from(taskList)
@@ -57,3 +67,15 @@ clearAllButton.addEventListener('click', function (e) {
         val.parentElement.removeChild(val)
     })
 })
+
+// var checkboxes = document.querySelector('.task-checkbox')
+// console.log(checkboxes)
+// checkboxes.addEventListener('click', function (e) {
+//     let taskList = document.querySelectorAll('.task')
+//     taskList = Array.from(taskList)
+
+//     taskList.forEach(function (val) {
+//         val.parentElement.removeChild(val)
+//     })
+// })
+
