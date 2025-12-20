@@ -5,22 +5,28 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <input type="text" class="input-task" />
-    <button class="create-task-button">add</button>
+    <div class="main">
+      <input type="text" class="input-task" />
+      <button class="create-task-button">add</button>
 
-    <button class="clear-all-button">clear all</button>
-    <div class="counter-total">
-      <p>Total :</p>
-      &nbsp;
+      <button class="clear-all-button">clear all</button>
+      <div class="count-tasks">
+        <div class="counter-total">
+          <p>Total :</p>
+          &nbsp;
 
-      <p class="total-task-counter"></p>
+          <p class="total-task-counter"></p>
+        </div>
+        <div class="counter-completed">
+          <p>Completed :</p>
+          &nbsp;
+          <p class="completed-task-counter"></p>
+        </div>
+      </div>
+
+      <div class="task-list"></div>
     </div>
-    <div class="counter-completed">
-      <p>Completed :</p>
-      &nbsp;
-      <p class="completed-task-counter"></p>
-    </div>
-    <div class="task-list"></div>
+
     <script src="script.js"></script>
   </body>
 </html>

@@ -1,15 +1,60 @@
-/* body{
-    background-color: black;
-    color: white;
-} */
-
-.counter-completed{
-    display: flex;
-    flex-direction: row;
-
+body {
+  position: fixed;
+  inset: 0px;
+  width: max-content;
+  height: max-content;
+  margin: auto;
+  background-color: #d1efb5;
 }
-.counter-total{
-    display: flex;
-    flex-direction: row;
-    
+.main {
+  background-color: #d3fad6;
+  padding: 3em;
+  border-radius: 1em;
+}
+input[type="text"] {
+  padding: 0.5em;
+  border-radius: 0.5em;
+}
+
+button {
+  padding: 0.5em;
+  border-radius: 0.5em;
+  background-color: bisque;
+}
+
+label {
+  font-size: large;
+}
+.count-tasks {
+  font-size: x-large;
+}
+
+input[type="checkbox"] {
+  width: 30px;
+  height: 30px;
+}
+
+.counter-completed {
+  display: flex;
+  flex-direction: row;
+}
+.counter-total {
+  display: flex;
+  flex-direction: row;
+}
+.task {
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+  align-items: center;
+}
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+.count-tasks {
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
 }
