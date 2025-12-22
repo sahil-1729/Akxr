@@ -201,11 +201,18 @@ function clearTasks(e) {
     let taskList = document.querySelectorAll('.task')
     taskList = Array.from(taskList)
 
+
     taskList.forEach(function (val) {
 
         const label = val.querySelector('label')
         if ((label.style.textDecoration != "")) {
             val.parentElement.removeChild(val)
+
+            const label = val.querySelector('label')
+            // console.log('clear all ',label.textContent)
+            const updatedTaskArr = taskArr.filter(val=>val.content != label.textContent)
+            saveTaskStorage(updatedTaskArr)
+            taskArr = updatedTaskArr
 
             const totalTask = document.querySelector('.total-task-counter')
             const cntTotalTask = Number(totalTask.textContent)
