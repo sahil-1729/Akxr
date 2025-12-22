@@ -1,15 +1,20 @@
 body {
-  position: fixed;
-  inset: 0px;
-  width: max-content;
-  height: max-content;
-  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100vw;
+  height: 100vh;
+
   background-color: #d1efb5;
 }
+
 .main {
   background-color: #d3fad6;
   padding: 3em;
   border-radius: 1em;
+  display: flex;
+  flex-direction: column;
 }
 input[type="text"] {
   padding: 0.5em;
@@ -57,4 +62,31 @@ input[type="checkbox"] {
   display: flex;
   flex-direction: row;
   gap: 1em;
+}
+
+.ip-container {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
+}
+.button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 100%;
+  gap: 1rem;
+}
+
+@media screen and (max-width: 425px) {
+  .main {
+    width: max-content;
+    padding: 2rem;
+  }
+  input[type="text"] {
+    width: 100%;
+  }
+  .ip-container {
+    flex-wrap: wrap;
+  }
 }

@@ -1,32 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Document</title>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <div class="main">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <div class="main">
+    <div class="ip-container">
       <input type="text" class="input-task" />
-      <button class="create-task-button">add</button>
-
-      <button class="clear-all-button">clear all</button>
-      <div class="count-tasks">
-        <div class="counter-total">
-          <p>Total :</p>
-          &nbsp;
-
-          <p class="total-task-counter"></p>
-        </div>
-        <div class="counter-completed">
-          <p>Completed :</p>
-          &nbsp;
-          <p class="completed-task-counter"></p>
-        </div>
+      <div class="button-container">
+        <button class="create-task-button">add</button>
+        <button class="clear-all-button">clear all</button>
       </div>
 
-      <div class="task-list"></div>
     </div>
 
-    <script src="script.js"></script>
-  </body>
+
+    <div class="count-tasks">
+      <div class="counter-total">
+        <p>Total :</p>
+        &nbsp;
+
+        <p class="total-task-counter"></p>
+      </div>
+      <div class="counter-completed">
+        <p>Completed :</p>
+        &nbsp;
+        <p class="completed-task-counter"></p>
+      </div>
+    </div>
+
+    <div class="task-list"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
 </html>
