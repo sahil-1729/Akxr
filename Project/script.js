@@ -221,3 +221,55 @@ var clearAllButton = document.querySelector('.clear-all-button')
 clearAllButton.addEventListener('click', clearTasks)
 
 
+
+
+
+
+
+// THEORY
+// we can't share cookies among browsers
+// here the information is stored only for single user
+
+// Cookies
+// can store only certain amt of information
+// local storage and session storage can store up to 10mb and 5mb data
+// cookies are supported in old browsers, but localstorage and session storage are supported in old browsers
+// cookies and local storage ke data can be accessed across multiple tabs, while session storage is only available on the tab you set session in
+
+// session storage duration
+// session storage is available as long as tab is open, when tab closed session closed
+
+// localstorage me data is stored forever, unless user sets to delete it
+// localstorage ka data is stored in browser itself, same as session Storage
+// but in cookies, data is stored in server as well, isiliye cookies ka storage is small
+
+// unless u want to send the data to server, make use of session or localstorage
+
+// localStorage.getItem
+// helps you retrieve item in loalStorage
+// localStorage.setItem
+// setItem me you need a key and value
+// localStorage.removeItem
+// - this removes the item
+
+// unlike sessionstorage the data will persist in browser,
+// session storage me once you close tab, its gone
+
+// sessionStorage also has same methods as localStorage
+// sessionStorage.getItem
+// sessionStorage.setItem
+// sessionStorage.removeItem
+
+// If you want to update existing data, then tuze .setItem method se set karna hoga
+
+// Cookies
+// document.cookie = 'name=kyle'
+// here cookie section me 'name' key with value 'kyle' is gonna get saved
+// also with the cookie, we can include more attributes like expiration time and all
+// like this document.cookie = 'name=kyle; expiration='+ new Date(2020,1,1).toUTCString()
+
+// to add another cookie
+// document.cookie = "name=S; expiration="+ new Date(9999,1,1).toUTCString()
+
+// to access the cookies, document.cookie
+// use library to access the cookies 
