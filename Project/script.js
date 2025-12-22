@@ -45,6 +45,7 @@ btn.addEventListener("click", function (e) {
     taskList.appendChild(newTask)
 
     addTask.value = ""
+    updatedValue = ""
 
     const totalTask = document.querySelector('.total-task-counter')
     const cntTotalTask = Number(totalTask.textContent)
@@ -105,3 +106,16 @@ clearAllButton.addEventListener('click', function (e) {
     })
 })
 
+
+function loadTask() {
+    let tasks = JSON.parse(localStorage.getItem('tasks')) || []
+}
+
+function saveTask() {
+    let tasks = JSON.parse(localStorage.getItem('tasks')) || []
+
+}
+function deleteTask() {
+    let tasks = JSON.parse(localStorage.getItem('tasks')) || []
+
+}
