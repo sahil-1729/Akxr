@@ -1,5 +1,32 @@
-.navbar{
-    display: flex;
-    flex-direction: row;
+.navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+
+  border-top: 0;
+  border-right: 0;
+  border-left: 0;
+
+  border-bottom: 0.1rem;
+  border-color: #e5e7eb;
+  border-style: solid;
+
+  /* box-shadow: px px 5px 0px #e5e7eb; */
 }
 
+.navbar-options {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  align-items: center;
+}
+
+.navbar-options button{
+    width: 8rem;
+    height: 2rem;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
