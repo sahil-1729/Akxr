@@ -86,6 +86,7 @@ const loadPricingList = () => {
 
         const pricingTitle = document.createElement('h3')
         pricingTitle.setAttribute('class', 'pricing-title')
+        pricingTitle.textContent = val.title
 
         const pricingCost = document.createElement('div')
         pricingCost.setAttribute('class', 'pricing-cost')
