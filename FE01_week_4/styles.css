@@ -55,8 +55,8 @@ h3,
 h4,
 h5,
 p {
-  padding: 0.25rem;
-  margin: 0.25rem;
+  /* padding: 0.25rem; */
+  /* margin: 0.25rem  */
 }
 
 .feature-cards {
@@ -82,6 +82,11 @@ p {
   flex-direction: row;
   gap: 1rem;
 }
+.pricing-cards {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+}
 .pricing-card {
   display: flex;
   justify-content: center;
@@ -96,4 +101,19 @@ p {
 
   padding-top: 2rem;
   padding-bottom: 2rem;
+}
+.pricing-cost {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0;
+}
+.pricing-description{
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+.pricing-descriptions {
+  display: flex;
+  flex-direction: column;
 }

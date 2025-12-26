@@ -16,6 +16,23 @@ let = featuresList = [
     }
 ]
 
+let = pricingList = [
+    {
+        "title": "Starter",
+        "price": "$12",
+        "description": ["Up to 5 projects", "Basic analytics", "Email support", "1 GB storage"]
+    },
+    {
+        "title": "Professional",
+        "price": "$29",
+        "description": ["Unlimited projects", "Advanced analytics", "Priority support", "50 GB storage"]
+    },
+    {
+        "title": "Enterprise",
+        "price": "$69",
+        "description": ["Everything in Pro", "Custom integrations", "24/7 phone support", "Unlimited storage"]
+    }
+]
 // use JSON to map and display features using js
 // const features = await getFeatures()
 
@@ -28,6 +45,7 @@ let = featuresList = [
 // }
 
 let featuresNodes = document.querySelector('.feature-cards')
+let pricingNodes = document.querySelector('.pricing-cards')
 
 const loadFeaturesList = () => {
     featuresList.map((val) => {
@@ -61,4 +79,53 @@ const loadFeaturesList = () => {
     })
 }
 
+const loadPricingList = () => {
+    pricingList.map((val) => {
+        const pricingCard = document.createElement('div')
+        pricingCard.setAttribute('class', 'pricing-card')
+
+        const pricingTitle = document.createElement('h3')
+        pricingTitle.setAttribute('class', 'pricing-title')
+
+        const pricingCost = document.createElement('div')
+        pricingCost.setAttribute('class', 'pricing-cost')
+        const pricingCostNumber = document.createElement('h1')
+        const pricingCostFrequency = document.createElement('p')
+        pricingCostNumber.textContent = val.price
+        pricingCostFrequency.textContent = '/month'
+        pricingCost.appendChild(pricingCostNumber)
+        pricingCost.appendChild(pricingCostFrequency)
+
+        const pricingDescriptions = document.createElement('div')
+        pricingDescriptions.setAttribute('class', 'pricing-descriptions')
+
+        val.description.map((description => {
+            const pricingDescriptionContainer = document.createElement('div')
+            pricingDescriptionContainer.setAttribute('class', 'pricing-description')
+
+            const pricingDescriptionIcon = document.createElement('img')
+            pricingDescriptionIcon.setAttribute('src', './assets/circle-check.svg')
+
+            const pricingDescriptionText = document.createElement('p')
+            pricingDescriptionText.textContent = description
+
+            pricingDescriptionContainer.appendChild(pricingDescriptionIcon)
+            pricingDescriptionContainer.appendChild(pricingDescriptionText)
+
+            pricingDescriptions.appendChild(pricingDescriptionContainer)
+        }))
+
+        const pricingButton = document.createElement('button')
+        pricingButton.setAttribute('class', 'pricing-cta')
+        pricingButton.textContent = "get started"
+
+        pricingCard.appendChild(pricingTitle)
+        pricingCard.appendChild(pricingCost)
+        pricingCard.appendChild(pricingDescriptions)
+        pricingCard.appendChild(pricingButton)
+
+        pricingNodes.appendChild(pricingCard)
+    })
+}
 loadFeaturesList()
+loadPricingList()
