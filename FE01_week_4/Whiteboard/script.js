@@ -1,3 +1,4 @@
+const socket = new WebSocket("ws://localhost:3000");
 
 const canvas = document.getElementById("whiteboard-canvas");
 let isDrawing = false;
@@ -23,7 +24,7 @@ function drawLine(context, x1, y1, x2, y2, stroke = 4) {
         lineToX: x2,
         lineToY: y2,
     })
-    log(linesList)
+    // log(linesList)
 
     context.beginPath();
     context.strokeStyle = drawColor;
@@ -39,21 +40,40 @@ function log(msg) {
     console.log(msg)
 }
 
+socket.onmessage = (event) => {
+    const data = JSON.parse(event.data);
+    console.log("here's data recieved ", data)
+
+    if (data.type === "draw") {
+
+        data.lines.map((val => {
+
+            val.map((val) => {
+                ctx.beginPath();
+                ctx.strokeStyle = val.drawColor;
+                ctx.lineWidth = val.lineWidth;
+                ctx.moveTo(val.moveToX, val.moveToY);
+                ctx.lineTo(val.lineToX, val.lineToY);
+                ctx.stroke();
+                ctx.closePath();
+            })
+        }))
+    }
+};
+
 if (canvas.getContext) {
     // this canvas.getContext refers to the canvas obj which has all the various methods like beginPath stroke and all 
 
     // GET WIDTH HEIGHT OF ELEMENT IN JS 
-    const w = canvas.offsetWidth
-    const h = canvas.offsetHeight
+    // const w = canvas.offsetWidth
+    // const h = canvas.offsetHeight
 
     canvas.style.width = '50vw';
     canvas.style.height = '50vh';
+
     // ...then set the internal size to match
     canvas.width = canvas.offsetWidth;
     canvas.height = canvas.offsetHeight;
-
-    log(canvas.width)
-    log(canvas.height)
 
     canvas.addEventListener('mouseup', (e) => {
         if (isDrawing) {
@@ -63,6 +83,8 @@ if (canvas.getContext) {
             drawLine(ctx, x, y, e.offsetX, e.offsetY);
 
             allLines.push(linesList)
+
+            socket.send(JSON.stringify({ type: "draw", lines: allLines }));
 
             x = 0;
             y = 0;
@@ -75,11 +97,9 @@ if (canvas.getContext) {
         x = e.offsetX;
         y = e.offsetY;
         isDrawing = true;
-        // log('mouse down')
     })
 
     canvas.addEventListener('mousemove', (e) => {
-        log('mouse move')
         if (isDrawing) {
             drawLine(ctx, x, y, e.offsetX, e.offsetY);
             x = e.offsetX;
@@ -88,7 +108,7 @@ if (canvas.getContext) {
 
     })
 } else {
-    // canvas-unsupported code here
+
 }
 
 // get list of buttons 
@@ -101,24 +121,11 @@ const eraseBtn = document.querySelector('.erase-btn')
 const undoBtn = document.querySelector('.undo-btn')
 
 undoBtn.addEventListener('click', () => {
-    log('clicked undo')
-    // ctx.restore()
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     allLines.pop()
-    log(allLines)
-    allLines.map((val => {
+    socket.send(JSON.stringify({ type: "draw", lines: allLines }));
 
-        val.map((val) => {
-            ctx.beginPath();
-            ctx.strokeStyle = val.drawColor;
-            ctx.lineWidth = val.lineWidth;
-            ctx.moveTo(val.moveToX, val.moveToY);
-            ctx.lineTo(val.lineToX, val.lineToY);
-            ctx.stroke();
-            ctx.closePath();
-        })
-    }))
 })
 
 eraseBtn.addEventListener('click', () => {
@@ -129,7 +136,6 @@ eraseBtn.addEventListener('click', () => {
 redBtn.addEventListener('click', () => {
     erase = false
     drawColor = "red"
-    // ctx.save()
 })
 greenBtn.addEventListener('click', () => {
     erase = false
@@ -148,5 +154,9 @@ changeColor.addEventListener('change', (e) => {
 clearBtn.addEventListener("click", () => {
     erase = false
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    allLines = []
+    socket.send(JSON.stringify({ type: "draw", lines: allLines }));
+
     drawColor = 'black'
 })
