@@ -1,0 +1,19 @@
+{
+  "features": [
+    {
+      "icon": "./assets/zap.svg",
+      "title": "Lightning Fast",
+      "content": "Built for speed and optimized for performance."
+    },
+    {
+      "icon": "./assets/zap.svg",
+      "title": "Secure & Reliable",
+      "content": "Enterprise-grade security you can trust."
+    },
+    {
+      "icon": "./assets/zap.svg",
+      "title": "Save Time",
+      "content": "Automate workflows and focus on what matters."
+    }
+  ]
+}

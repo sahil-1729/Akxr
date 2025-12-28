@@ -118,7 +118,7 @@ const loadPricingList = () => {
 
         const pricingButton = document.createElement('button')
         pricingButton.setAttribute('class', 'pricing-cta')
-        pricingButton.textContent = "get started"
+        pricingButton.textContent = "Get started"
 
         pricingCard.appendChild(pricingTitle)
         pricingCard.appendChild(pricingCost)

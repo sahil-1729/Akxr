@@ -102,6 +102,8 @@ p {
   justify-content: center;
   text-align: center;
   gap: 2rem;
+  
+  margin-bottom: 2rem;
 }
 
 .feature-icon-div {
@@ -113,11 +115,19 @@ p {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 1rem;
+  padding: 2rem;
+  font-weight: 500;
 }
 .pricing-toggle {
   display: flex;
   flex-direction: row;
-  gap: 1rem;
+  gap: 0.5rem;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.pricing-toggle p {
+  font-size: 0.75rem;
 }
 .pricing-cards {
   display: flex;
@@ -128,6 +138,7 @@ p {
   display: flex;
   justify-content: center;
   flex-direction: column;
+  gap: 1rem;
 
   border: 0.1rem;
   border-color: #e5e7eb;
@@ -138,7 +149,17 @@ p {
 
   padding-top: 2rem;
   padding-bottom: 2rem;
+
+  border-radius: 0.5rem;
 }
+
+.pricing-card button {
+  background-color: #f3f4f6;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+
 .pricing-cost {
   display: flex;
   flex-direction: row;
@@ -153,6 +174,7 @@ p {
 .pricing-descriptions {
   display: flex;
   flex-direction: column;
+  gap: 0.5rem;
 }
 
 @media screen and (max-width: 425px) {
@@ -178,6 +200,9 @@ p {
   .hero h1 {
     padding-left: 0.75rem;
     padding-right: 0.75rem;
+  }
+  .pricing-cards {
+    flex-direction: column;
   }
 }
 
