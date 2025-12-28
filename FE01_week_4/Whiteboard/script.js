@@ -5,6 +5,7 @@ let x = 0;
 let y = 0;
 
 let drawColor = "black"
+const ctx = canvas.getContext("2d");
 
 function drawLine(context, x1, y1, x2, y2) {
     context.beginPath();
@@ -22,7 +23,6 @@ function log(msg) {
 
 if (canvas.getContext) {
     // this canvas.getContext refers to the canvas obj which has all the various methods like beginPath stroke and all 
-    const ctx = canvas.getContext("2d");
 
     // GET WIDTH HEIGHT OF ELEMENT IN JS 
     const w = canvas.offsetWidth
@@ -72,7 +72,7 @@ const redBtn = document.querySelector('.red-btn')
 const greenBtn = document.querySelector('.green-btn')
 const blueBtn = document.querySelector('.blue-btn')
 const changeColor = document.querySelector('.color-picker')
-
+const clearBtn = document.querySelector('.clear-btn')
 
 redBtn.addEventListener('click', () => {
     drawColor = "red"
@@ -86,4 +86,8 @@ blueBtn.addEventListener('click', () => {
 
 changeColor.addEventListener('change', (e) => {
     drawColor = e.target.value
+})
+
+clearBtn.addEventListener("click", () => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 })
