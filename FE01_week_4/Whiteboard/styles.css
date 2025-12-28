@@ -1,0 +1,29 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body{
+    width: 100%;
+}
+
+#whiteboard-canvas {
+  border: dotted;
+
+  /* width: 90%;
+  height: 50rem; */
+}
+
+.canvas-container {
+  position: relative;
+}
+
+.btn-container {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
