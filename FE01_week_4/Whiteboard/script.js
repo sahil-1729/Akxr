@@ -2,8 +2,8 @@ const socket = new WebSocket("ws://localhost:3000");
 
 const canvas = document.getElementById("whiteboard-canvas");
 let isDrawing = false;
-let x = 0;
-let y = 0;
+let mouseX = 0;
+let mouseY = 0;
 let linesList = []
 let allLines = []
 
@@ -78,33 +78,37 @@ if (canvas.getContext) {
     canvas.addEventListener('mouseup', (e) => {
         if (isDrawing) {
             if (erase) {
-                drawLine(ctx, x, y, e.offsetX, e.offsetY, 32);
+                drawLine(ctx, mouseX, mouseY, e.offsetX, e.offsetY, 32);
             }
-            drawLine(ctx, x, y, e.offsetX, e.offsetY);
+            drawLine(ctx, mouseX, mouseY, e.offsetX, e.offsetY);
 
             allLines.push(linesList)
 
             socket.send(JSON.stringify({ type: "draw", lines: allLines }));
 
-            x = 0;
-            y = 0;
+            mouseX = 0;
+            mouseY = 0;
             isDrawing = false;
         }
     })
 
     canvas.addEventListener('mousedown', (e) => {
         linesList = []
-        x = e.offsetX;
-        y = e.offsetY;
+        mouseX = e.offsetX;
+        mouseY = e.offsetY;
         isDrawing = true;
     })
 
     canvas.addEventListener('mousemove', (e) => {
         if (isDrawing) {
-            drawLine(ctx, x, y, e.offsetX, e.offsetY);
-            x = e.offsetX;
-            y = e.offsetY;
+            drawLine(ctx, mouseX, mouseY, e.offsetX, e.offsetY);
+            mouseX = e.offsetX;
+            mouseY = e.offsetY;
         }
+
+        mouseX = e.offsetX;
+        mouseY = e.offsetY;
+
 
     })
 } else {
@@ -160,3 +164,37 @@ clearBtn.addEventListener("click", () => {
 
     drawColor = 'black'
 })
+
+
+// var canvas = document.getElementById("cc");
+// var ctx = canvas.getContext("2d");
+
+//=== Clipboard ===============================
+
+// Link - https://stackoverflow.com/questions/18377891/how-can-i-let-user-paste-image-data-from-the-clipboard-into-a-canvas-element-in
+window.addEventListener("paste", pasteHandler); //chrome
+function pasteHandler(e) {
+    if (e.clipboardData == false) return false; //empty
+    var items = e.clipboardData.items;
+    if (items == undefined) return false;
+    for (var i = 0; i < items.length; i++) {
+        if (items[i].type.indexOf("image") == -1) continue; //not image
+        var blob = items[i].getAsFile();
+        var URLObj = window.URL || window.webkitURL;
+        var source = URLObj.createObjectURL(blob);
+        paste_createImage(source);
+    }
+}
+
+//draw pasted object
+function paste_createImage(source) {
+    var pastedImage = new Image();
+
+    log(mouseX)
+    log(mouseY)
+
+    pastedImage.onload = function () {
+        ctx.drawImage(pastedImage, mouseX, mouseY, 64, 64);
+    }
+    pastedImage.src = source;
+}
