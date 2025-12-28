@@ -4,9 +4,11 @@ let isDrawing = false;
 let x = 0;
 let y = 0;
 
+let drawColor = "black"
+
 function drawLine(context, x1, y1, x2, y2) {
     context.beginPath();
-    context.strokeStyle = "black";
+    context.strokeStyle = drawColor;
     // context.lineWidth = 1;
     context.moveTo(x1, y1);
     context.lineTo(x2, y2);
@@ -64,3 +66,24 @@ if (canvas.getContext) {
 } else {
     // canvas-unsupported code here
 }
+
+// get list of buttons 
+const redBtn = document.querySelector('.red-btn')
+const greenBtn = document.querySelector('.green-btn')
+const blueBtn = document.querySelector('.blue-btn')
+const changeColor = document.querySelector('.color-picker')
+
+
+redBtn.addEventListener('click', () => {
+    drawColor = "red"
+})
+greenBtn.addEventListener('click', () => {
+    drawColor = "green"
+})
+blueBtn.addEventListener('click', () => {
+    drawColor = "blue"
+})
+
+changeColor.addEventListener('change', (e) => {
+    drawColor = e.target.value
+})
