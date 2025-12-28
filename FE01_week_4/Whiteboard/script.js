@@ -28,8 +28,8 @@ if (canvas.getContext) {
     const w = canvas.offsetWidth
     const h = canvas.offsetHeight
 
-    canvas.style.width = '100%';
-    canvas.style.height = '50%';
+    canvas.style.width = '50vw';
+    canvas.style.height = '50vh';
     // ...then set the internal size to match
     canvas.width = canvas.offsetWidth;
     canvas.height = canvas.offsetHeight;
