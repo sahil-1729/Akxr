@@ -15,6 +15,10 @@ body {
   border: dotted; */
 }
 
+.hidden{
+  display: none;
+}
+
 #whiteboard-canvas {
   border: dotted;
 

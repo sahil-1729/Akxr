@@ -123,6 +123,22 @@ const changeColor = document.querySelector('.color-picker')
 const clearBtn = document.querySelector('.clear-btn')
 const eraseBtn = document.querySelector('.erase-btn')
 const undoBtn = document.querySelector('.undo-btn')
+const downloadBtn = document.querySelector('.download-btn')
+
+downloadBtn.addEventListener('click', () => {
+    let image = canvas.toDataURL('image/png');
+    console.log(image)
+
+    const listButtons = document.querySelector('.btn-container')
+    const download = document.createElement('a')
+
+    download.setAttribute('href', image)
+    download.setAttribute('class', 'hidden')
+    download.download = 'saved_canvas.png'
+    listButtons.appendChild(download)
+    download.click()
+
+})
 
 undoBtn.addEventListener('click', () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
