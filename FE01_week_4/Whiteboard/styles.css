@@ -22,6 +22,9 @@ body {
 
 #whiteboard-canvas {
   border: dotted;
+  border-color: #d1d5dc;
+  border-radius: 0.5rem;
+
   margin: 2rem;
   /* margin-left: 2rem; */
 
