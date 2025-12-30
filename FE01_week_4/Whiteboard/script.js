@@ -1,4 +1,4 @@
-const socket = new WebSocket("ws://localhost:3000");
+const socket = new WebSocket("https://akxr.onrender.com");
 
 const canvas = document.getElementById("whiteboard-canvas");
 let isDrawing = false;
@@ -24,7 +24,6 @@ function drawLine(context, x1, y1, x2, y2, stroke = 4) {
         lineToX: x2,
         lineToY: y2,
     })
-    // log(linesList)
 
     context.beginPath();
     context.strokeStyle = drawColor;
@@ -68,7 +67,7 @@ if (canvas.getContext) {
     // const w = canvas.offsetWidth
     // const h = canvas.offsetHeight
 
-    canvas.style.width = '90%';
+    canvas.style.width = '80%';
     canvas.style.height = '50vh';
 
     // ...then set the internal size to match
