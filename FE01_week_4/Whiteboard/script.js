@@ -43,6 +43,10 @@ socket.onmessage = (event) => {
     const data = JSON.parse(event.data);
     console.log("here's data recieved ", data)
 
+    if (data.lines.length === 0) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
     if (data.type === "draw") {
 
         data.lines.map((val => {
@@ -67,8 +71,21 @@ if (canvas.getContext) {
     // const w = canvas.offsetWidth
     // const h = canvas.offsetHeight
 
-    canvas.style.width = '80%';
+    // canvas.style.width = '50%';
     canvas.style.height = '50vh';
+
+    const width = window.innerWidth || document.documentElement.clientWidth ||
+        document.body.clientWidth;
+    const height = window.innerHeight || document.documentElement.clientHeight ||
+        document.body.clientHeight;
+
+    console.log(width, height);
+
+    if (width > 425) {
+        // console.log(window.innerWidth)
+        // console.log('executed')
+        canvas.style.width = '80vw';
+    }
 
     // ...then set the internal size to match
     canvas.width = canvas.offsetWidth;

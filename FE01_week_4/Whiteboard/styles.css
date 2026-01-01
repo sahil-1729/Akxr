@@ -28,8 +28,8 @@ body {
   margin: 2rem;
   /* margin-left: 2rem; */
 
-  /* width: 90%;
-  height: 50rem; */
+  /* width: 80vw; */
+  /* height: 50rem; */
 }
 
 .canvas-container {
@@ -40,7 +40,7 @@ body {
 
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-start;
   /* align-items: center; */
 
   /* width: 100%; */
@@ -54,7 +54,7 @@ body {
   padding: 2rem;
   /* padding-left: 2rem; */
 
-  height: 100vh;
+  /* height: 100vh; */
 
   border: 0.1rem;
   border-color: #e5e7eb;
@@ -88,4 +88,46 @@ button {
   align-items: center;
   width: 100%;
   gap: 2rem;
+}
+
+
+.whiteboard-canvas-container{
+  display: flex;
+  justify-content: center;
+  border: red;
+  /* border-style: dotted; */
+  /* width: 90%; */
+}
+
+@media screen and (max-width: 425px) {
+  .canvas-container {
+    align-items: center;
+    flex-direction: column;
+    gap: 0;
+    justify-content: flex-start;
+  }
+  .btn-container {
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: max-content;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .canvas-container {
+    /* align-items: center; */
+    flex-direction: row;
+    /* gap: 0; */
+    justify-content: space-between;
+  }
+  
+  #whiteboard-canvas {
+    /* width: 100%;; */
+  }
+
+  /* .btn-container {
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: max-content;
+  } */
 }
