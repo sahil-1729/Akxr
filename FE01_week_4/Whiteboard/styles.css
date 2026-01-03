@@ -90,13 +90,9 @@ button {
   gap: 2rem;
 }
 
-
-.whiteboard-canvas-container{
+.whiteboard-canvas-container {
   display: flex;
   justify-content: center;
-  border: red;
-  /* border-style: dotted; */
-  /* width: 90%; */
 }
 
 @media screen and (max-width: 425px) {
@@ -115,19 +111,12 @@ button {
 
 @media screen and (min-width: 1024px) {
   .canvas-container {
-    /* align-items: center; */
     flex-direction: row;
-    /* gap: 0; */
-    justify-content: space-between;
+    /* justify-content: space-between; */
   }
-  
-  #whiteboard-canvas {
-    /* width: 100%;; */
+  .whiteboard-canvas-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
   }
-
-  /* .btn-container {
-    flex-direction: row;
-    flex-wrap: wrap;
-    height: max-content;
-  } */
 }

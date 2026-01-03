@@ -47,6 +47,9 @@ socket.onmessage = (event) => {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
 
+    if (data.event === "undo") {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
     if (data.type === "draw") {
 
         data.lines.map((val => {
@@ -65,13 +68,6 @@ socket.onmessage = (event) => {
 };
 
 if (canvas.getContext) {
-    // this canvas.getContext refers to the canvas obj which has all the various methods like beginPath stroke and all 
-
-    // GET WIDTH HEIGHT OF ELEMENT IN JS 
-    // const w = canvas.offsetWidth
-    // const h = canvas.offsetHeight
-
-    // canvas.style.width = '50%';
     canvas.style.height = '50vh';
 
     const width = window.innerWidth || document.documentElement.clientWidth ||
@@ -82,8 +78,6 @@ if (canvas.getContext) {
     console.log(width, height);
 
     if (width > 425) {
-        // console.log(window.innerWidth)
-        // console.log('executed')
         canvas.style.width = '80vw';
     }
 
@@ -157,10 +151,9 @@ downloadBtn.addEventListener('click', () => {
 })
 
 undoBtn.addEventListener('click', () => {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     allLines.pop()
-    socket.send(JSON.stringify({ type: "draw", lines: allLines }));
+    socket.send(JSON.stringify({ type: "draw", lines: allLines, event: "undo" }));
 
 })
 
