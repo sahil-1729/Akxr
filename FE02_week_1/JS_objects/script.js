@@ -27,3 +27,27 @@ function log(a) {
 // user.login()
 // user.logout()
 user.logBlogs()
+
+log(Math)
+log(Math.SQRT1_2)
+log(Math.log(0))
+
+const random = Math.random()
+log(Math.round(random))
+log(random * 10)
+
+
+let scoreOne = 50
+let scoreTwo = scoreOne
+log([scoreOne, scoreTwo])
+
+scoreOne = 100
+log([scoreOne, scoreTwo])
+
+const userOne = { name: "user" }
+const userTwo = userOne
+
+log([userOne, userTwo])
+
+userOne.name = "sss"
+log([userOne, userTwo])
