@@ -22,4 +22,30 @@
 - Js is synchronous single threaded language 
     - what it means by synchronous, is that it can execute the js code in specific order, and it can move to next line only after it has executed the current line 
 
-###
+### JS ep 2
+- Execution context is created in 2 phases 
+    1. Memory Creation phase
+        - Line by line it will store 
+        - Initially when storing variables, it will store special value as 'undefined' 
+        - In case of functions, unka fn logic is stored as value
+    2. code execution phase
+        - Again it executes line by line
+        - whenever we see a function with parenthesis '()' it means fn is gonna get executed 
+        - Whenever a function is invoked, a new execution context is created 
+            - This new execution context is gonna hae memory creation and code phases
+            - function execute karte samay, when encountered 'return' keyword, it tells ki return the control to the place where it was invoked
+            - once function is executed, the execution context will be completely deleted
+    - once all the logic of program is completed, global execution context is destroyed 
+- How does js manages the execution context ka creation, deletion? 
+    - it manages in call stack, meaning it has its own call stack
+    - at bottom of stack there is global execution context
+    - when new execution context is created, is put at top of stack 
+    - when it's deleted, it is popped out of stack
+    - call stack manages order of execution of 'execution context'
+    - call stack is known by many names, 
+        - execution context stack 
+        - call stack
+        - program stack 
+        - control stack
+        - runtime stack 
+        - machine stack 
