@@ -49,3 +49,15 @@
         - control stack
         - runtime stack 
         - machine stack 
+
+### JS ep 3
+- when we run a index.js file with no contents, then also global execution context is created, and then destroyed
+- window object has lots of functions
+    - they are created and provided by js engine
+    - window is a global object that is created along with global execution context
+    - along with window object, a 'this' variable is created 
+    - Chrome has v8 engine as js engine, firefox has its own
+    - so every engine has responsibility to create these objects, like the window obj, this keyword
+    - So whenever, we create any variable or function in global space(global space is where the variables or function aren't created inside function), it gets attached to window object, and we can access the variables and functions from the global object
+    - let's say **var a = 10** kiya
+        - so when we are actually doing console.log(a) or this.a, we are actually calling window.a 
