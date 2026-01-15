@@ -72,3 +72,21 @@
 - js is loosely typed lang
 - loosely typed language are also known as weakly typed language    
 - its a bad practice to assign 'undefined' as value to a variable 
+
+### JS scope chain
+- function a(){
+    console.log(b)
+}
+var b = 10;
+a();
+- when a is called, fn a will look for variable named b within the fn itself, when it doesn't find value, then it will search for the value outside the fn.
+- scope is where you can access specific variable, 
+- what is scope of variable b? meaning where can i access the variable b   
+- scope directly related to lexical environment
+- Whenever a execution context is created, a lexical environment is also created 
+- lexical matlab sequence, hierarchy, so 
+- every execution context will have access to lexical env of its parent, matlab ki access to the memory section of its parent
+- lexical environment of global execution context is null,
+- so, when execution context trying to find value, and usko current execution context me nai mila vo variable ka value, it will go to lexical environment of its parent, and it will go on till it gets the value, 
+    - agar value null value aata hai at the end, it will show the variable is not defined
+    - This way of finding, the value of variable is called as scope chaining 
