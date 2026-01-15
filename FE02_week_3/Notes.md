@@ -61,3 +61,14 @@
     - So whenever, we create any variable or function in global space(global space is where the variables or function aren't created inside function), it gets attached to window object, and we can access the variables and functions from the global object
     - let's say **var a = 10** kiya
         - so when we are actually doing console.log(a) or this.a, we are actually calling window.a 
+
+### JS undefined vs not defined
+- 'undefined' is like a placeholder for values,
+- jaise when we declare a variable a = 5
+- after global execution context created, memory me space is allocated to a with 'undefined' value, 
+- jab memory wala part will be executed then 5 allocated hoga, so yeah its like a placeholder(undefined wala value) 
+- there is difference between undefined and 'not defined'
+- not defined is like not being allocated to something
+- js is loosely typed lang
+- loosely typed language are also known as weakly typed language    
+- its a bad practice to assign 'undefined' as value to a variable 
