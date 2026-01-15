@@ -69,7 +69,7 @@ fs.readFile("fe02_bank.csv", "utf-8", (err, data) => {
                     const LargestTransaction = Math.max(valueSummarized.LargestTransaction, val.Amount)
 
                     const SalaryTransactions = [...valueSummarized.SalaryTransactions, val.TransactionID]
-                    
+
                     const TotalCredit = valueSummarized.TotalCredit + val.Amount
                     const TotalDebit = valueSummarized.TotalDebit + val.Amount
                     const final = {
@@ -98,7 +98,30 @@ fs.readFile("fe02_bank.csv", "utf-8", (err, data) => {
     })
 
     // make summarized data 
-    Log(summarizedData)
+    // Log(summarizedData)
+    const csvFormat = summarizedData.map((val) => {
+        let tupleCsv = ''
+        Object.values(val).forEach(val => {
+            if (Array.isArray(val)) {
+                val = val.join('|');
+
+                // val = String(val).replace(',','|')
+            }
+            tupleCsv += String(val) + ','
+        })
+        const finalTuple = tupleCsv.slice(0, -1)
+        return finalTuple
+    })
+    const finalCsvFormat = csvFormat.join("\n")
+    Log(finalCsvFormat)
+
+    fs.writeFile("ConvertData.csv", finalCsvFormat, (err) => {
+        if (err) {
+            console.error('Error saving file:', err);
+            return;
+        }
+        console.log('File has been saved successfully');
+    });
 });
 
 function Log(msg) {
