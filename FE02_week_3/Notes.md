@@ -90,3 +90,31 @@ a();
 - so, when execution context trying to find value, and usko current execution context me nai mila vo variable ka value, it will go to lexical environment of its parent, and it will go on till it gets the value, 
     - agar value null value aata hai at the end, it will show the variable is not defined
     - This way of finding, the value of variable is called as scope chaining 
+
+### 
+- let and const declarations are also hoisted, but they are in temporal dead zone, look at 'let a'
+- ![alt text](image-1.png)
+- so let and const ke variables are stored in another seperate memory, not global memory, and we cannot access them unless we put value on them
+- Temporal Dead Zone
+    - TDZ is the phase since when the variable is hoisted, that is space has been allocated and undefined assign kiya hai uss variable ko('let' wala variable) till the time usko initialize kiya ho
+    - Basically its the phase from hoisting until it gets assigned a value
+    - WHen we try to access the variable in temporal dead zone, it gives reference error 
+
+- How the f* can we do this?
+var a = 10
+var a = 1000
+but we cant do this using let or const
+
+when using const, we need to declare as well as initialize in the same line
+
+- Errors
+    - Reference error 
+        - when you can't access a variable, but you are trying to access it
+    - Syntax Error
+        - missing syntax or problem with syntax
+    - Typed error
+        - assigning different type to const
+
+- always use const whenever u can
+- if not const, use let wherever possible
+- always keep declarations of variables at top
