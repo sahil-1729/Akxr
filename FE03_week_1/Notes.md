@@ -24,3 +24,14 @@ this shouldn't happen, but we can do this in js
 - To check the version of typescript
     - tsc -v
 - We cannot execute .ts file directly, for that we need to use tsc <FILE NAME>.ts, this will transpile(convert) into .js file, and then jaake we can execute the file
+
+- Js doesn't have special runtime value for integers, matlab js me there is no float or int, uske liye everything is number  
+- Good practice 
+    - let userId: number = 334455.4
+    userId.toFixed() --- This is bad practice, bc its redundant to put "number" annotation here, as already we are assigning number type ka value, and ts is smart enough to know ki userId ka type is gonna be number
+    - let userId = 334455.1
+    userId.toFixed()
+
+- When typescript do not know what to keep as the type of the variable, its going to put it as "any"
+- using "any" means to let the ts know to avoid checking the type of that variable
+- there is a setting where we can mention in tsconfig file to strictly prevent use of "any" keyword
