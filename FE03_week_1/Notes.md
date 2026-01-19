@@ -35,3 +35,5 @@ this shouldn't happen, but we can do this in js
 - When typescript do not know what to keep as the type of the variable, its going to put it as "any"
 - using "any" means to let the ts know to avoid checking the type of that variable
 - there is a setting where we can mention in tsconfig file to strictly prevent use of "any" keyword
+
+- When to use functions
