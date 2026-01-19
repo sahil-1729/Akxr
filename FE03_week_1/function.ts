@@ -69,19 +69,65 @@ const User = {
   isActive: true,
 };
 
-function createUser({ name: string, isPaid: boolean }) {}
+// function createUser({ name: string, isPaid: boolean }) {}
+// createUser({ name: "sahil", isPaid: true });
 
-createUser({ name: "sahil", isPaid: true });
-
-// How to add return type as object 
+// How to add return type as object
 function createCourse(): { name: string; price: number } {
   return { name: "S", price: 0 };
 }
 
-// Weird behaviour of typescript 
+// Weird behaviour of typescript
 // when we add new value lets say, isFree boolean, it would give error, as isFree doesn't exist in the createUser fn
-createUser({name: "s", isPaid: true, isFree: true})
+// createUser({name: "s", isPaid: true, isFree: true})
 
 // but when we store it in const and pass into fn, it will go smoothly
-const tmp = {name: "s", isPaid: true, isFree: true}
-createUser(tmp)
+const tmp = { name: "s", isPaid: true, isFree: true };
+// createUser(tmp)
+
+// this is type alias
+type User = {
+  name: string;
+  email: string;
+  isActive: boolean;
+};
+
+// here what I am doing is whenever, someone is passing using this function, it should be of a particular type, in this case its User
+function createUser1(user: User): User {
+  return {
+    name: "",
+    email: "",
+    isActive: true,
+  };
+}
+
+createUser1({ name: "", email: "", isActive: true });
+
+type User1 = {
+  // isse it will make sure, once its assigned i wont be able to change it
+  readonly _id: string;
+  name: string;
+  email: string;
+  isActive: boolean;
+  // it marks as optional, meaning not necessary to add while creating the obj
+  credDetails?: number
+};
+
+let myUser: User1 = { _id: "abcd", name: "S", email: "Sa", isActive: true };
+
+myUser.email = "randomEmail"
+// here we cant change it bc it can only be read once assigned
+// myUser._id = "f"
+
+type cardNumber = {
+  cardNumber: string
+}
+
+type cardDate = {
+  cardDate: string 
+}
+
+// here we are mentioning to combine both
+type cardDetails = cardNumber & cardDate & {
+  cvv : number
+}
