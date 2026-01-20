@@ -208,3 +208,42 @@ newUser[1] = "asd";
 // even though we added type in newUser we are able to push element into the constant, with the type mentioned, also it is not matching with the type User3 should have given error
 
 newUser.push(1);
+
+// Interface
+interface User4 {
+  email: string;
+  userId: number;
+  googleId?: string;
+  readonly dbId: number;
+
+  // startTrial: () => string;
+  // This is another way of writing function
+  startTrial(): string;
+
+  getCoupon(couponname: string, val: number): number;
+}
+
+const sahil: User4 = {
+  email: "h@",
+  userId: 1221,
+  dbId: 1,
+  startTrial: () => "trial started",
+  getCoupon: (name: "hitesh", val: 1) => {
+    return 10;
+  },
+};
+sahil.email = "s@gmail.com";
+
+// we cant change it
+// sahil.dbId = 223
+
+interface User5 {
+  githubToken: string;
+}
+// extending a interface 
+interface Admin extends User {
+  role: "admin" | "ta" | "learner";
+}
+
+// Type and interface are very similar, almost all features of 'interface' are available in 'type'
+// The major difference between 'type' and 'interface' is that 'type' is not extendable, whereas 'interface' is extendable 
