@@ -251,14 +251,39 @@ interface Admin extends User {
 class User6 {
   email: string;
   name: string;
-  // to avoid getting access to variable 
+  // to avoid getting access to variable
   // private readonly city: string = "Jaipur"
   // or we could use another way to make it private, there is nothing called as private in js
-  readonly #city:string = "Jaipur"
+  readonly #city: string = "Jaipur";
   // readonly city: string = "Jaipur";
 
   constructor(email: string, name: string) {
     this.email = email;
     this.name = name;
   }
+
+  // how to set getter
+  get getAppleEmail(): string {
+    return "apple";
+  }
+
+  // how to show private variable outside ? use getter setters
+  _courseCount = 0;
+  get courseCount(): number {
+    return this._courseCount;
+  }
+  // we cannot set any type as return type, not even void in setter
+  set courseCount(courseNumber: number) {
+    if (courseNumber <= 1) {
+      // throw error
+    }
+    this._courseCount = courseNumber;
+  }
+
+  // we cannot access this function as private ho gaya 
+  private deleteToken() {
+    console.log("token deleted");
+  }
+  // #deleteToken(){
+  // }
 }
