@@ -110,24 +110,89 @@ type User1 = {
   email: string;
   isActive: boolean;
   // it marks as optional, meaning not necessary to add while creating the obj
-  credDetails?: number
+  credDetails?: number;
 };
 
 let myUser: User1 = { _id: "abcd", name: "S", email: "Sa", isActive: true };
 
-myUser.email = "randomEmail"
+myUser.email = "randomEmail";
 // here we cant change it bc it can only be read once assigned
 // myUser._id = "f"
 
 type cardNumber = {
-  cardNumber: string
-}
+  cardNumber: string;
+};
 
 type cardDate = {
-  cardDate: string 
-}
+  cardDate: string;
+};
 
 // here we are mentioning to combine both
-type cardDetails = cardNumber & cardDate & {
-  cvv : number
+type cardDetails = cardNumber &
+  cardDate & {
+    cvv: number;
+  };
+
+// union is combn of 2 or more types of data that I can include in union
+// Good practice : try to keep as strict as possible
+let score: number | string = 33;
+
+score = 44;
+
+score = "55";
+
+type User2 = {
+  name: string;
+  id: number;
+};
+
+type Admin2 = {
+  username: string;
+  id: number;
+};
+
+let hitesh: User2 | Admin2 = {
+  name: "H",
+  id: 123,
+};
+
+hitesh = {
+  username: "HC",
+  id: 123,
+};
+
+// function getDbId(id:number|string){
+//   console.log("DB id is ", id)
+// }
+
+getDbId(3)
+getDbId("3")
+
+// now if I modify such that ki add a fn to lower case, then it will give error, as it can execute the method in case of number, so we need a strong check to see if its a string
+function getDbId(id:number|string){
+  // when the code reached 175 line, it assumes id, can be string or Number, but once it executes 176, its confirmed that its a string 
+  if(typeof id === "string"){
+    id.toLowerCase()
+  }else{
+    id += 2
+  }
+  
 }
+
+
+// COmmon mistake 
+// here we made sure, either the data can be number array or string array 
+const data: number[]  = [1,2,3]
+const data1:  string[] = ["1","2","3"]
+// What if we want both? here's the common mistake we make, and this gives error, bc here we mention string array or number array 
+// const data2: number[] | string[]  = [1,2,"3"]
+
+// Solution 
+const data2: (number|string)[] = [1,2,"5"]
+
+// Also we can assign specific value in ts 
+let pi:3.14
+// we can't reassign the values 
+// pi=4
+
+let seatAllotment: "aisle" | "middle" | "window"
