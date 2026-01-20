@@ -165,34 +165,46 @@ hitesh = {
 //   console.log("DB id is ", id)
 // }
 
-getDbId(3)
-getDbId("3")
+getDbId(3);
+getDbId("3");
 
 // now if I modify such that ki add a fn to lower case, then it will give error, as it can execute the method in case of number, so we need a strong check to see if its a string
-function getDbId(id:number|string){
-  // when the code reached 175 line, it assumes id, can be string or Number, but once it executes 176, its confirmed that its a string 
-  if(typeof id === "string"){
-    id.toLowerCase()
-  }else{
-    id += 2
+function getDbId(id: number | string) {
+  // when the code reached 175 line, it assumes id, can be string or Number, but once it executes 176, its confirmed that its a string
+  if (typeof id === "string") {
+    id.toLowerCase();
+  } else {
+    id += 2;
   }
-  
 }
 
-
-// COmmon mistake 
-// here we made sure, either the data can be number array or string array 
-const data: number[]  = [1,2,3]
-const data1:  string[] = ["1","2","3"]
-// What if we want both? here's the common mistake we make, and this gives error, bc here we mention string array or number array 
+// COmmon mistake
+// here we made sure, either the data can be number array or string array
+const data: number[] = [1, 2, 3];
+const data1: string[] = ["1", "2", "3"];
+// What if we want both? here's the common mistake we make, and this gives error, bc here we mention string array or number array
 // const data2: number[] | string[]  = [1,2,"3"]
 
-// Solution 
-const data2: (number|string)[] = [1,2,"5"]
+// Solution
+const data2: (number | string)[] = [1, 2, "5"];
 
-// Also we can assign specific value in ts 
-let pi:3.14
-// we can't reassign the values 
+// Also we can assign specific value in ts
+let pi: 3.14;
+// we can't reassign the values
 // pi=4
 
-let seatAllotment: "aisle" | "middle" | "window"
+let seatAllotment: "aisle" | "middle" | "window";
+
+// creating tuple having specific type
+const user: (string | number)[] = ["HC"];
+const user1: [string, number, boolean] = ["hc", 1, true];
+
+let rgb: [number, number, number] = [1, 2, 3];
+
+type User3 = [number, string];
+const newUser: User3 = [1, "d"];
+newUser[1] = "asd";
+
+// even though we added type in newUser we are able to push element into the constant, with the type mentioned, also it is not matching with the type User3 should have given error
+
+newUser.push(1);
