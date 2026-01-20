@@ -240,10 +240,25 @@ sahil.email = "s@gmail.com";
 interface User5 {
   githubToken: string;
 }
-// extending a interface 
+// extending a interface
 interface Admin extends User {
   role: "admin" | "ta" | "learner";
 }
 
 // Type and interface are very similar, almost all features of 'interface' are available in 'type'
-// The major difference between 'type' and 'interface' is that 'type' is not extendable, whereas 'interface' is extendable 
+// The major difference between 'type' and 'interface' is that 'type' is not extendable, whereas 'interface' is extendable
+
+class User6 {
+  email: string;
+  name: string;
+  // to avoid getting access to variable 
+  // private readonly city: string = "Jaipur"
+  // or we could use another way to make it private, there is nothing called as private in js
+  readonly #city:string = "Jaipur"
+  // readonly city: string = "Jaipur";
+
+  constructor(email: string, name: string) {
+    this.email = email;
+    this.name = name;
+  }
+}
