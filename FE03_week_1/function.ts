@@ -287,3 +287,6 @@ class User6 {
   // #deleteToken(){
   // }
 }
+
+// SInce private members can be accessed only within the class, not even the inherited class 
+// protected access modifier helps in allowing the variables in parent class to be accessed by the child class 
