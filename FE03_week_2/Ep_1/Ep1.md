@@ -53,8 +53,11 @@
 - to create element using react, we use React.createElement()
   - .createElement takes 3 arguements
     - first is the tag name
-    - the obj
-    - the content that we want to insert
+    - the obj ({id : "heading1"})
+      - this is the place, where we would add attributes to the tag
+    - the content or value that we want to insert
+      - e.g "hello world"
+
   - now that we have created the element, we want to insert the element
     - for this, we need to mention react, ki the root element, from where we would perform the dom manipulation
     - For dom operations, we make use of ReactDom not React
@@ -62,3 +65,36 @@
       - root is the place from where all the operations will be performed
       - root.render(<THE NAME OF THE ELEMENT>)
         - this method is actually putting the element into the DOM
+
+### Whats the most expensive operation performed on webpage?
+
+- its when the DOM is need to be manipulated
+- e.g you click a toggle button on web page, and button is switched off and on
+  - here we are manipulating the DOM, that is the expensive operation
+- And all the frameworks that are getting created, day by day, are trying to optimize these DOM operations
+
+- React comes with a philosophy that, Everything that we are going to do in browser is to be done using js
+
+### It should send HTML element ryt?
+
+const a = React.createElement("h1")
+console.log(a)
+
+- it prints an object instead of HTML element, because its a react element now
+  {
+  "type": "h1",
+  "key": null,
+  "props": {
+  "abc": "def",
+  "children": "Hello world"
+  },
+  "\_owner": null,
+  "\_store": {}
+  }
+- and react element is a js object, not an HTML element
+- and the props section contains the attributes of the tag(which in this case is the tag is 'h1') and children(this is the place which contains the value we provide to h1 tag)
+
+now
+root.render(a)
+
+- will take the react element i.e a and use that element to create h1 element that browser will understand
