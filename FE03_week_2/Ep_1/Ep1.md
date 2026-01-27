@@ -24,6 +24,10 @@
 
 - Write notes, handwritten on every concept mentioned
 - pause the video and DO the exact code mentioned in the video, on your own
+  - be curious
+    - try different ways to do same thing
+    - figure out different edge cases
+    - qn everything, each loc ka existance
 - maintain github repo
 
 ### CDN
@@ -55,7 +59,7 @@
     - first is the tag name
     - the obj ({id : "heading1"})
       - this is the place, where we would add attributes to the tag
-    - the content or value that we want to insert
+    - the content or value or the children, that we want to insert into the tag
       - e.g "hello world"
 
   - now that we have created the element, we want to insert the element
@@ -92,9 +96,63 @@ console.log(a)
   "\_store": {}
   }
 - and react element is a js object, not an HTML element
-- and the props section contains the attributes of the tag(which in this case is the tag is 'h1') and children(this is the place which contains the value we provide to h1 tag)
+- and the props section contains the attributes of the tag(which in this case is the tag is 'h1') and children(this is the place which contains the value we provide to h1 tag, or the children of the element, like p tag or div tag, etc)
 
 now
 root.render(a)
 
-- will take the react element i.e a and use that element to create h1 element that browser will understand
+- the .render method, will take the react element i.e 'a' that we used and use that element to convert into h1(if it contains the h1 tag) HTML element from the obj, that browser will understand and append into DOM
+
+### Why JSX
+
+WHen the elements are very complex, it looks very messy , e.g
+
+const d = createElement(
+"div",
+{ id: "parent" },
+[
+[
+createElement("div", { id: "child2" }, "I am div 1"),
+createElement("div", { id: "child1" }, "I am div 2"),
+],
+[
+createElement("div", { id: "child3" }, "I am div 1"),
+createElement("div", { id: "child4" }, "I am div 2"),
+],
+]
+);
+
+- We can avoid writing this complex structure and use JSX
+- its not necessary we have to use JSX only, in order to use react
+
+### What does render method do?
+
+let container = document.getElementById("app")!;
+let root = createRoot(container)
+
+const c = createElement("div", { id: "parent" }, [createElement("div", { id: "child2" }, "I am div 1"), createElement("div", { id: "child1" }, "I am div 2")])
+root.render(c)
+
+- here it does converts the obj recieved into HTML element and then is added to the DOM, right?
+- but what about the elements that already existed in root?
+  <body>
+    <div>
+    another element
+    </div>
+    <div id="app">
+      <div>THIS IS GONNA GET REPLACED</div>
+    </div>
+    <script type="module" src="index.tsx"></script>
+  </body>
+
+- so after the loc root.render(c) is executed, the contents inside the id "app" is replaced by the 'c' element, not appended in the 'c' element
+- So first the HTML file is loaded and rendered, then jaake the script file ke contents is executed,
+  - usi me, when script tag is executed,usi me when this loc is executed
+    root.render(c)
+    - the contents of div tag with id 'app' is replaced by the 'c' element
+  - and react will render only in the div tag with id 'app', not anywhere else
+
+- The order of script tags that we include in HTML file matters
+    <script type="module" src="index.tsx"></script>
+
+- React is a library not a framework
