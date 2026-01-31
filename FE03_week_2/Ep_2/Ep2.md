@@ -18,7 +18,7 @@
   - so in order to do that, we make use of bundler
   - so things like webpack, parcel, vite - these are bundler
 
-# Bundler 
+# Bundler
 
 - it bundles the files, packages the files, so that it can be shipped to prodn
 - in create react app, it makes use of bundler like webpack, babel
@@ -100,3 +100,10 @@ So how is it happening?
 
 - npx parcel build index.html
   - to build production ready file
+
+### browserList
+
+- its a package used to support the web page for older broswers
+- "browsersList": ["last 2 versions"]
+- this ensures ki every browser ke atleast 2 version older tak 100% chalega, it adds more code to add older browser support
+- use case - governement website
