@@ -18,7 +18,7 @@
   - so in order to do that, we make use of bundler
   - so things like webpack, parcel, vite - these are bundler
 
-# Bundler
+# Bundler 
 
 - it bundles the files, packages the files, so that it can be shipped to prodn
 - in create react app, it makes use of bundler like webpack, babel
@@ -57,3 +57,46 @@
   - since every dependencies will have their own dependencies, they will have their own package.json
 
   - we don't need to push node_modules, into repo, as they are very huge and also we can re install node_modules using package.json
+
+### npx
+
+- when we ran cmd npx parcel index.html
+- npm means installing the package, npx means executing the package
+- so when we ran npx parcel, we actually execute the package
+
+- using CDN links is not the right way to use react in project
+- here's the steps we took
+- created HTML file, used CDN links to use react
+- then installed parcel, use npx parcel index.html to execute the package
+- then removed the cnd links and run file using parcel, shows react not found,
+- then npm install react and use imports to import react in app.js, shows error, we cannot use import or export in client browser
+- as normal broswer script cannot have import or export, and we used import or export in normal .js file
+- so we need to mention in HTML file, the script we have referenced is of type="module"
+<script type="module" src="index.tsx"></script>
+- so after mentioning above, and we execute npx parcel index.html, and when me make changes in file, it gets immediately reflected, without need of writing npx parcel index.HTML every time making change
+
+So how is it happening?
+
+### parcel
+
+- features?
+  - hot module replacement
+    - how does HMR work?
+      - it uses file watching algorithm
+  - local server
+  - dev build environment
+  - it also does caching, jiske vajah se, every time we make changes and it gets reflected more quickly than before bc of caching, which leads to buidl faster
+  - its a bundler so obv bundling of files
+  - image optimization
+  - consistent hashing
+    - it generates unqie name for the html, css, js files, so that hash only changes when the files content changes
+  - differential bundling
+    - it provides other bundlers for different apps, lets say for older browsers
+  - also allows to host on https apart from http
+  - Tree shaking
+    - remove unused code
+
+- there are so many things other than react, which makes the react app fast
+
+- npx parcel build index.html
+  - to build production ready file
