@@ -23,7 +23,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 // console.log("12345");
 
 //   replaces the contents of div with root as id with 'a' element
-root.render(a);
+// root.render(a);
 
 // So in order to avoid this complex way of creating element above, we make use of jsx, which provides a easier syntax of writing elements
 
@@ -39,3 +39,37 @@ const headingJsx = <h1 id="new">Hello world</h1>;
 // const headingJsx = React.createElement("h1", {id : "new"}, "Hello world");
 
 console.log("headin element ", headingJsx);
+
+// JSX is not actually pure javascript
+// bc if you run the code given below in browser console, will show error
+// const headingJsx = <h1 id="new">Hello world</h1>;
+
+// The reason it doesn't work in browser console, but works in here, is bc
+// parcel(npm package) here, transpiles(converted to code that browser will understand) the code before sending it to js engine for execution
+// parcel alone isn't doing the transipilation, inside parcel, babel(a package) does the transpilation(which is inside parcel)
+// and in browser console, we don't have parcel or babel
+
+// so what babel would do is, it would convert the JSX and converts into React.createElement(...), i.e in a language the JS engine would understand(transpiling kar rha )
+// This is what happens when we write JSX
+// JSX -> babel converts into this using AST ig React.createElement(...) -> React Element (JS object) -> HTMLElement
+
+// babel ka job is to convert from one langauage to another
+// Babel also used to convert ECMAScript 2015+ code into a backwards compatible version of JavaScript in current and older browsers or environment
+// can convert to older version of js from ES6
+// convert JSX which we required
+
+// EXPLORE BABEL DOCS
+
+// Why JSX is not HTML
+// in HTML we don't use className to add classes in HTML element, e.g
+// const c = <h1 className="abcd"></h1>;
+// We make use of camelCases while naming attributes in JSX
+
+// use round parenthesis when using multiple lines in writing JSX
+const c = (
+  <h1>
+    Yoo
+    <div>sdfd</div>
+  </h1>
+);
+root.render(c);
