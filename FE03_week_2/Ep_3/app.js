@@ -73,3 +73,13 @@ const c = (
   </h1>
 );
 root.render(c);
+
+// Components
+// There are 2 types of components in react
+// Class based components - OLD way of writing
+// Functional components - NEW way of writing
+
+// React Functional Component is nothing but a normal JS function
+// Always write your name of the function with a capital letter ONLY
+// react functional component is a norma JS function which returns jsx or react element
+const fn = () => {};
