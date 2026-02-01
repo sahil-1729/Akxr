@@ -72,7 +72,7 @@ const c = (
     <div>sdfd</div>
   </h1>
 );
-root.render(c);
+// root.render(c);
 
 // Components
 // There are 2 types of components in react
@@ -82,4 +82,64 @@ root.render(c);
 // React Functional Component is nothing but a normal JS function
 // Always write your name of the function with a capital letter ONLY
 // react functional component is a norma JS function which returns jsx or react element
-const fn = () => {};
+
+// This is a react Element
+const reactElement = (
+  <h1>
+    Yoo
+    <div>sdfd</div>
+  </h1>
+);
+// This is react functional component
+const Fn = () => {
+  return <h1>hello world</h1>;
+};
+const FnComponent = () => (
+  <h1>
+    hello world
+    <div>Hello world 2</div>
+  </h1>
+);
+
+// so how to render the functional Component?
+// this works
+root.render(FnComponent());
+
+// but proper way is, this syntax, as it helps babel know its a functional component
+// root.render(<FnComponent />);
+
+// All contents in Web page in react is made of react component
+
+// This is React component composition
+const Fn1 = () => {
+  return <div>hello world1</div>;
+};
+console.log("returns react element ", Fn1());
+
+const FnComponent1 = () => (
+  <h1>
+    hello world
+    <Fn1 />
+    {/* This will cause infinite render  */}
+    {/* <FnComponent1 /> */}
+  </h1>
+);
+// root.render(FnComponent1());
+
+// We can write js logic inside jsx, which is itself very powerful
+const FnComponent2 = () => (
+  <div>
+    hello world
+    <Fn1 />
+    {Fn1()}
+    {reactElement}
+    {console.log("yooooo")}
+    {1 + 1 + "1" + 1 + ["a", 1]}
+  </div>
+);
+
+root.render(FnComponent2());
+
+// JSX prevents cross site scripting attack
+
+// PLAY AROUND WITH CODE, B CURIOUS ABOUT EVERY MINUTE THING IN CODE, ASK WHY IT HAS TO BE THIS WAY
