@@ -35,18 +35,35 @@ const Body = () => {
     </div>
     <div className="res-container">
       <RestaurantCard />
+      <RestaurantCard />
+      <RestaurantCard />
+      <RestaurantCard />
+      <RestaurantCard />
+      <RestaurantCard />
+      <RestaurantCard />
+      <RestaurantCard />
+      <RestaurantCard />
+      <RestaurantCard />
+      <RestaurantCard />
+      <RestaurantCard />
+
     </div>
   </div>)
 }
 const styleCard = {
-  backgroundColor: "#f0f0f0"
+  // backgroundColor: "#f0f0f0"
 }
 
 const RestaurantCard = () => {
   return (<div className="res-card" style={styleCard}>
+    <img className="res-logo"
+      src="https://images.pexels.com/photos/27860371/pexels-photo-27860371/free-photo-of-street-food.jpeg?auto=compress&cs=tinysrgb&dpr=1&h=300" />
     <h3>
       Meghana Foods
     </h3>
+    <h4>Biryani, North Indian, Asian</h4>
+    <h4>4.4 stars</h4>
+    <h4>38 minutes</h4>
   </div>)
 }
 const AppLayout = (): JSX.Element => {
