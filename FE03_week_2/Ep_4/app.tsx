@@ -77,6 +77,7 @@ const RestaurantCard = ({ resName, cuisine }: { resName?: string, cuisine?: stri
     <h4>38 minutes</h4>
   </div>)
 }
+
 const AppLayout = (): JSX.Element => {
   return (
     <div className="app">
