@@ -1,12 +1,14 @@
 import RestaurantCard from "./RestaurantCard"
 import restoList from "../utils/restoList"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 const Body = () => {
     let resto = restoList.data.data.cards[0].card.card.gridElements.infoWithStyle.restaurants
 
     console.log(resto)
-
+    useEffect(() => {
+        console.log("I come first")
+    }, [])
     const [restoState, setRestoState] = useState(resto)
 
     return (<div className="body">

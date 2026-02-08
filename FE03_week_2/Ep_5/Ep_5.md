@@ -71,3 +71,12 @@
     - virtual dom would look like a react element, like a obj, and ye objects ko hi compare karte hai
   - it tries to find the difference between the both DOMs, once it finds the difference, in our example as from 7 cards to 3 cards, the difference is 4 cards, that 4 cards is updated to the actual DOM, on every render cycle,
     - AND THATS HOW REACT BECOMES FASTER
+
+- virtual DOM existed already earlier, react made use of virtual dom and make use of it
+  - WHY REACT IS FAST???
+    - virtual DOM
+      - reduce DOM manipulation
+    - makes use of diff algorithm
+
+- READ READ READ
+  - ask qns and know about it
