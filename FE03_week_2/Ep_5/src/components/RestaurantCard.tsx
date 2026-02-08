@@ -1,3 +1,6 @@
+import { JSX } from "react"
+import { LOGO_URL } from "../utils/constants"
+
 // we can write like this below
 // const RestaurantCard = (props: { resName?: string, cuisine?: string }): JSX.Element => {
 
@@ -9,18 +12,18 @@ const styleCard = {
 }
 
 // or we can write like this, destructuring it 
-const RestaurantCard = ({ resName, cuisine }: { resName?: string, cuisine?: string }): JSX.Element => {
+const RestaurantCard = ({ resName, cuisine, rating }: { resName?: string, cuisine?: string, rating?: number }): JSX.Element => {
     // props.resName
     // props.cuisine
 
     return (<div className="res-card" style={styleCard}>
         <img className="res-logo"
-            src="https://images.pexels.com/photos/27860371/pexels-photo-27860371/free-photo-of-street-food.jpeg?auto=compress&cs=tinysrgb&dpr=1&h=300" />
+            src={LOGO_URL} />
         <h3>
             {resName}
         </h3>
         <h4>{cuisine}</h4>
-        <h4>4.4 stars</h4>
+        <h4>{rating} stars</h4>
         <h4>38 minutes</h4>
     </div>)
 }
