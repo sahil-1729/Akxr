@@ -43,3 +43,12 @@
 ### CORS
 
 - our broswers block us, while we are making API call from one origin to another origin(2 different origin)
+
+### While fetching data
+
+- make use of optional chaining
+  value?.name
+
+### What is conditional rendering
+
+- when we do rendering at particular condition, its conditional rendering
