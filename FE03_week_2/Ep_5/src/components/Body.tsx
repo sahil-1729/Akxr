@@ -51,12 +51,12 @@ const Body = () => {
         <div className="res-container">
             {/* resName and cuisine are props, we are passing props(properties) */}
             {/* <RestaurantCard resName="Meghana foods" cuisine="Biryani, North Indian, Asian" /> */}
-            {restoState.map((val: { name?: string, }, key) => {
-                const nameeeee = val?.name
+            {restoState.map((value, key) => {
+                const nameeeee = value?.name
 
-                return <RestaurantCard key={val.id} resName={nameeeee}
-                    cuisine={val.cuisines.toString()}
-                    rating={val.avgRating} />
+                return <RestaurantCard key={value.id} resName={nameeeee}
+                    cuisine={value.cuisines.toString()}
+                    rating={value.avgRating} />
             })}
 
         </div>
