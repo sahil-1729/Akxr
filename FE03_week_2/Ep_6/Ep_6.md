@@ -52,3 +52,9 @@
 ### What is conditional rendering
 
 - when we do rendering at particular condition, its conditional rendering
+
+- when we use set fn in useState, react will re render the component
+  - how does it re render? by using reconcillation algorithm
+
+- if we declare "const" state variable, in useState, how is it that we are able to modify it? eventhough its declared constant
+  - bc it creates like a snapshot, it doesn't actually modifies the value, like wo vapaas call karta hai component ko but with the new value
