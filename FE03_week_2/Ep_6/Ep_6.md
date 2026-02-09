@@ -39,3 +39,7 @@
   - dependency array
     - when its set as []
       - the functional component(the main fn) will get executed(completing the render cycle) and then then jaake callback fn(useEffect me jo hai) is executed( I HAVE TRIED AND TESTED, ITS TRUE)
+
+### CORS
+
+- our broswers block us, while we are making API call from one origin to another origin(2 different origin)

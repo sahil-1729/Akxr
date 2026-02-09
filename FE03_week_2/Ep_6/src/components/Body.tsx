@@ -10,19 +10,7 @@ const Body = () => {
     const a = async () => {
         const data = await fetch("https://www.swiggy.com/mapi/restaurants/list/v5?lat=19.07480&lng=72.88560&collection=83637&tags=layout_CCS_Burger&sortBy=&filters=&type=rcv2&offset=0&carousel=true&third_party_vendor=1")
         const jsData = await data.json()
-        // console.log(jsData)
-        const res = jsData.data.cards.filter((val: Object) => {
-
-            const a = val.card.card.info
-            if (a) {
-                return true
-            } else {
-                return false
-            }
-        }).map((val) => val.card.card.info)
-
-        setRestoState(res)
-        console.log('the data ', res)
+        console.log('the data ', jsData)
         // return jsData
     }
     useEffect(() => {
@@ -39,10 +27,10 @@ const Body = () => {
         </div>
         <div className="filter">
             <button onClick={() => {
-                // resto = resto.filter(val => val.info.avgRating > 4.2
-                // )
-                // setRestoState(resto)
-                // console.log(restoState)
+                resto = resto.filter(val => val.info.avgRating > 4.2
+                )
+                setRestoState(resto)
+                console.log(restoState)
                 // here data is filtered, but UI is updated 
                 // since list of resto is changed the UI should also been updated along with data changed 
 
@@ -50,13 +38,10 @@ const Body = () => {
         </div>
         <div className="res-container">
             {/* resName and cuisine are props, we are passing props(properties) */}
-            {/* <RestaurantCard resName="Meghana foods" cuisine="Biryani, North Indian, Asian" /> */}
-            {restoState.map((val: { name?: string, }, key) => {
-                const nameeeee = val?.name
+            <RestaurantCard resName="Meghana foods" cuisine="Biryani, North Indian, Asian" />
+            {restoState.map((val, key) => {
 
-                return <RestaurantCard key={val.id} resName={nameeeee}
-                    cuisine={val.cuisines.toString()}
-                    rating={val.avgRating} />
+                return <RestaurantCard key={key} resName={val.info?.name} cuisine={val.info.cuisines.toString()} rating={val.info.avgRating} />
             })}
 
         </div>
