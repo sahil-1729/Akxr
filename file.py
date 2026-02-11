@@ -1,176 +1,152 @@
 import os
-import time
-import shutil
-import logging
-import random
-import string
-from datetime import datetime, timedelta
-import threading
 
-# ==============================
-# CONFIGURATION SECTION
-# ==============================
+from celery import Celery
 
-WATCH_FOLDER = "watch_folder"
-ARCHIVE_FOLDER = "archive_folder"
-LOG_FILE = "automation.log"
-REPORT_FILE = "daily_report.txt"
-FILE_EXPIRY_MINUTES = 1  # archive files older than this
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "ai_reel.settings")
+app = Celerimport json
+import math
+import os
+import re
 
-# ==============================
-# SETUP
-# ==============================
+from dotenv import load_dotenv
+from openai import OpenAI
 
-if not os.path.exists(WATCH_FOLDER):
-    os.makedirs(WATCH_FOLDER)
-
-if not os.path.exists(ARCHIVE_FOLDER):
-    os.makedirs(ARCHIVE_FOLDER)
-
-logging.basicConfig(
-    filename=LOG_FILE,
-    level=logging.INFO,
-    format="%(asctime)s - %(levelname)s - %(message)s"
-)
-
-print("Automation system started...")
-logging.info("Automation system initialized.")
-
-# ==============================
-# HELPER FUNCTIONS
-# ==============================
-
-def generate_random_string(length=8):
-    return ''.join(random.choices(string.ascii_letters + string.digits, k=length))
+from .models import ScenePrompt
 
 
-def simulate_notification(message):
-    """Simulates sending a notification."""
-    print(f"[NOTIFICATION] {message}")
-    logging.info(f"Notification sent: {message}")
+def create_scene_prompts(reel_requested):
+    load_dotenv(os.path.join(os.path.dirname(__file__), "..", ".env"))
+    client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+
+    number_of_scenes = math.ceil(reel_requested.duration / 8)
+
+    image_safe = reel_requested.image.image.url if reel_requested.image else ""
+    avatar_safe_description = (
+        reel_requested.avatar.description if reel_requested.avatar else ""
+    )
+    description_safe = reel_requested.description if reel_requested.description else ""
+    avatar_image_safe = reel_requested.avatar.image if reel_requested.avatar else ""
+
+    prompt = f"""
+You are an expert video scene prompt writer for AI video generation systems genre being educational videos
+Your job is to create structured multi-scene prompts with *perfect avatar consistency* *easily understandable videos*
+and *Enhance focus of user*
+
+[INPUT DATA]
+Product Image: {image_safe}
+Avatar Image:{avatar_image_safe}
+Avatar Description: {avatar_safe_description}
+Product Description: {description_safe}
+Total Video Duration: {reel_requested.duration} seconds
+Number of Scenes: {number_of_scenes}
+
+[GLOBAL CONSISTENCY RULES — UNBREAKABLE]
+1. First, extract:
+   **STABLE_AVATAR**: A single avatar description from {avatar_safe_description} and use image {avatar_image_safe} as *STABLE_AVATAR*
+      - Include every detail exactly.
+      - DO NOT change skin tone, face shape, age, hairstyle, body type or any identity feature.
+      - Include {avatar_image_safe} as STABLE_AVATAR
+      - Clothing may change to match the scene, but all other features must remain identical.
+
+   **STABLE_PRODUCT**: A STABLE_PRODUCT image derived from {image_safe} and product description derived from {description_safe}
+      - The product must NEVER change in any scene.
+      - The {description_safe} should form basis of storyline
+
+2. For ALL scenes:
+   - Make the explanation extremely simple and crisp so even a novice understands.
+   - Keep the viewer completely focused using engaging pacing, clean visuals, and smooth scene transitions.
+   - You MUST embed STABLE_AVATAR and STABLE_PRODUCT *inside the final prompt text of every scene verbatim*.
+   - You must not paraphrase, rewrite or shorten these blocks.
+   - They must appear inside the prompt in their full form.
+   - Use slow, clear narration pacing suitable for beginners.
+   - Use very short sentences.
+   - Use dynamic but subtle camera motion to maintain attention.
+   - Add clean text labels for keywords.
+   - Keep visuals simple and uncluttered.
+   - Ensure the avatar keeps natural eye-contact and steady facial expression.
 
 
-def rename_file(filepath):
-    """Renames file with timestamp."""
+3. Scene Requirements:
+   - sequence starts at 1
+   - duration per scene = 1–8 seconds
+   - Total duration = {reel_requested.duration} seconds
+   - Each scene MUST contain the following inside the "prompt" field:
+
+        A. STABLE_AVATAR block (verbatim)
+        B. STABLE_PRODUCT block (verbatim)
+        C. Scene-specific action
+        D. Storyline continuity
+        E. Consistent lighting, color palette, cinematic tone
+        F. A transition cue for the next scene
+        H. Voiceover line (explaining the product benefit)
+
+4. Tone:
+Warm, friendly, beginner-friendly, patient.
+
+5. Style Consistency:
+   - Same lighting temperature
+   - Same cinematic mood
+   - Same color palette
+   - Same aspect ratio
+   - No abrupt scene resets
+
+[OUTPUT FORMAT — STRICT]
+Return ONLY a JSON array like this:
+
+[
+  {{
+    "sequence": 1,
+
+    "prompt": "FULL scene prompt that includes STABLE_AVATAR and STABLE_PRODUCT embedded inside"
+  }}
+]
+
+Every scene’s "prompt" field MUST embed the full STABLE_AVATAR and STABLE_PRODUCT text inside it.
+Do NOT output STABLE blocks separately. Embed them inside every scene.
+"""
+    response = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[{"role": "user", "content": prompt}],
+        temperature=1.1,
+    )
+
+    raw_scenes = response.choices[0].message.content
+
+    parsed_scenes = []
+    parsed_scenes = extract_json(raw_scenes)
+    save_scene_prompts(parsed_scenes, reel_requested)
+    return parsed_scenes
+
+
+def extract_json(text):
+    match = re.search(r"\[\s*{.*?}\s*\]", text, re.DOTALL)
+    if not match:
+        return None
     try:
-        directory, filename = os.path.split(filepath)
-        name, ext = os.path.splitext(filename)
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        new_name = f"{name}_{timestamp}{ext}"
-        new_path = os.path.join(directory, new_name)
-        os.rename(filepath, new_path)
-
-        logging.info(f"File renamed: {filename} -> {new_name}")
-        return new_path
-    except Exception as e:
-        logging.error(f"Rename failed: {e}")
-        return filepath
+        return json.loads(match.group(0))
+    except Exception:
+        return None
 
 
-def archive_old_files():
-    """Moves old files to archive folder."""
-    try:
-        now = datetime.now()
-        for file in os.listdir(WATCH_FOLDER):
-            path = os.path.join(WATCH_FOLDER, file)
-            if os.path.isfile(path):
-                modified_time = datetime.fromtimestamp(os.path.getmtime(path))
-                if now - modified_time > timedelta(minutes=FILE_EXPIRY_MINUTES):
-                    shutil.move(path, os.path.join(ARCHIVE_FOLDER, file))
-                    logging.info(f"Archived file: {file}")
-                    simulate_notification(f"Archived file: {file}")
-    except Exception as e:
-        logging.error(f"Archive process failed: {e}")
+def save_scene_prompts(parsed_scenes, reel_requested):
+    if not parsed_scenes:
+        raise ValueError("No scenes to save. Parsed scenes list is empty.")
+
+    for scene in parsed_scenes:
+        if "sequence" not in scene or "prompt" not in scene:
+            raise ValueError(f"Invalid scene structure: {scene}")
+    for scene in parsed_scenes:
+        ScenePrompt.objects.create(
+            reel_request=reel_requested,
+            sequence=scene["sequence"],
+            prompt=scene["prompt"],
+        )
+    return True
+y("ai_reel")
+app.config_from_object("django.conf:settings", namespace="CELERY")
+app.autodiscover_tasks(["reels"])
 
 
-def generate_report():
-    """Generates a daily report."""
-    try:
-        with open(REPORT_FILE, "w") as report:
-            report.write("=== AUTOMATION DAILY REPORT ===\n")
-            report.write(f"Generated at: {datetime.now()}\n\n")
-            report.write(f"Files in watch folder: {len(os.listdir(WATCH_FOLDER))}\n")
-            report.write(f"Files in archive folder: {len(os.listdir(ARCHIVE_FOLDER))}\n")
-
-        logging.info("Daily report generated.")
-    except Exception as e:
-        logging.error(f"Report generation failed: {e}")
-
-
-# ==============================
-# MAIN MONITOR LOOP
-# ==============================
-
-def monitor_folder():
-    """Continuously monitors folder for new files."""
-    already_seen = set()
-
-    while True:
-        try:
-            current_files = set(os.listdir(WATCH_FOLDER))
-            new_files = current_files - already_seen
-
-            for file in new_files:
-                path = os.path.join(WATCH_FOLDER, file)
-                if os.path.isfile(path):
-                    logging.info(f"New file detected: {file}")
-                    simulate_notification(f"New file detected: {file}")
-                    rename_file(path)
-
-            already_seen = current_files
-            archive_old_files()
-
-            time.sleep(5)
-
-        except Exception as e:
-            logging.error(f"Monitoring error: {e}")
-            time.sleep(5)
-
-
-# ==============================
-# RANDOM FILE GENERATOR
-# ==============================
-
-def random_file_generator():
-    """Creates random files periodically to simulate activity."""
-    while True:
-        time.sleep(random.randint(10, 20))
-        filename = f"file_{generate_random_string()}.txt"
-        filepath = os.path.join(WATCH_FOLDER, filename)
-
-        with open(filepath, "w") as f:
-            f.write("Random content: " + generate_random_string(50))
-
-        logging.info(f"Random file created: {filename}")
-
-
-# ==============================
-# SCHEDULER
-# ==============================
-
-def scheduler():
-    """Runs scheduled tasks."""
-    while True:
-        time.sleep(60)
-        generate_report()
-
-
-# ==============================
-# THREAD STARTUP
-# ==============================
-
-if __name__ == "__main__":
-    monitor_thread = threading.Thread(target=monitor_folder)
-    generator_thread = threading.Thread(target=random_file_generator)
-    scheduler_thread = threading.Thread(target=scheduler)
-
-    monitor_thread.daemon = True
-    generator_thread.daemon = True
-    scheduler_thread.daemon = True
-
-    monitor_thread.start()
-    generator_thread.start()
-    scheduler_thread.start()
-
-    while True:
-        time.sleep(1)
+@app.task(bind=True)
+def debug_task(self):
+    print(f"Request: {self.request!r}")
