@@ -83,3 +83,7 @@
     background-position: 1000px 0;
   }
 }
+
+.filter {
+  display: flex;
+}

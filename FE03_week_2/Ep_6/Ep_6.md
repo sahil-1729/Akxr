@@ -58,3 +58,5 @@
 
 - if we declare "const" state variable, in useState, how is it that we are able to modify it? eventhough its declared constant
   - bc it creates like a snapshot, it doesn't actually modifies the value, like wo vapaas call karta hai component ko but with the new value
+
+- Whenever state variable ka value changes, react re renders, it triggers a reconcilitaion cycle

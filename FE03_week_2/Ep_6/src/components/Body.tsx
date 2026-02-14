@@ -33,6 +33,7 @@ const Body = () => {
     }, [])
 
     const [restoState, setRestoState] = useState([])
+    const [searchTxt, setSearchTxt] = useState("")
 
     // what is conditional rendering 
     if (restoState.length === 0) {
@@ -40,10 +41,17 @@ const Body = () => {
     }
 
     return (<div className="body">
-        <div className="search">
-            Search
-        </div>
+
         <div className="filter">
+            <div className="search">
+                <input type="text" value={searchTxt} className="search-box" onChange={(e) => {
+                    const res = e.target.value
+                    setSearchTxt(res)
+                }} />
+                <button onClick={() => {
+                    console.log(searchTxt)
+                }}>Search</button>
+            </div>
             <button onClick={() => {
                 resto = resto.filter(val => val.info.avgRating > 4.2
                 )
@@ -59,7 +67,8 @@ const Body = () => {
             {/* <RestaurantCard resName="Meghana foods" cuisine="Biryani, North Indian, Asian" /> */}
             {restoState.map((value, key) => {
 
-                return <RestaurantCard key={value.id} resName={name}
+                return <RestaurantCard key={value.id}
+                    resName={name}
                     cuisine={value.cuisines.toString()}
                     rating={value.avgRating} />
             })}
