@@ -69,6 +69,7 @@ const Body = () => {
             {restoState.map((value, key) => {
 
                 return <RestaurantCard key={value.id}
+                    id={value.id}
                     resName={name}
                     cuisine={value.cuisines.toString()}
                     rating={value.avgRating} />
