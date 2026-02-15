@@ -11,3 +11,36 @@
 
 - Link is a component provided by react router dom
 - when we make use of anchor tag, and click on anchor tag, it actually refresh the page
+- When we use Link component, it refreshes the component, whereas in case of anchor tag, it reloads the page
+- THere are 2 types of routing that I can have in application,
+  - client side routing and server side routing
+- sever side routing
+  - in server side routing, when we click on anchor tag, it reloads the page, make a network call, gets the data of that html file and then shows the data
+- client side routing
+  - we don't make network call in client side routing, as all the components are already loaded when the page is loading for first time, and when go to any route, its just the components gets interchanged, and we don't make any network call
+
+### React router
+
+- dynamic route
+  - const .... = createBrowserRouter([
+    {
+    path : ...,
+    element: <...>,
+    children : [
+    {
+    path: "/restaurants/:resId",
+    element: <>
+    },
+    {
+    path: "/contact",
+    element: <>
+    }
+    ]
+    }
+    ])
+
+  - :redId is dynamic
+
+- Useparams
+  - is a hook
+  - const params = useParams()
