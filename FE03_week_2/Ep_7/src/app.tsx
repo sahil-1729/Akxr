@@ -7,6 +7,7 @@ import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom"
 import About from "./components/About"
 import Contact from "./components/Contact";
 import Error from "./components/Error"
+import RestaurantMenu from "./components/RestarauntMenu";
 
 // create react element, hwihc is an obj
 const a = React.createElement("div", {}, "Namaste BRO");
@@ -29,16 +30,20 @@ const appRouter = createBrowserRouter([
     element: <AppLayout />,
     children: [
       {
-        path: "/",
+        path: "",
         element: <Body />
       },
       {
-        path: "/about",
+        path: "about",
         element: <About />
       },
       {
-        path: "/contact",
+        path: "contact",
         element: <Contact />
+      },
+      {
+        path: "restaurants/:resId",
+        element: <RestaurantMenu />
       }
     ],
     errorElement: <Error />
