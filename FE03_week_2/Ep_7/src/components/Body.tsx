@@ -9,18 +9,19 @@ const Body = () => {
     // console.log(resto)
 
     const a = async () => {
-        const data = await fetch("https://www.swiggy.com/mapi/restaurants/list/v5?lat=19.07480&lng=72.88560&collection=83637&tags=layout_CCS_Burger&sortBy=&filters=&type=rcv2&offset=0&carousel=true&third_party_vendor=1")
+        const data = await fetch("https://foodfire.onrender.com/api/restaurants?lat=21.1702401&lng=72.83106070000001&page_type=DESKTOP_WEB_LISTING")
         const jsData = await data.json()
-        // console.log(jsData)
-        const res = jsData.data.cards.filter((val: Object) => {
+        console.log(jsData.data.cards[1].card.card.gridElements.infoWithStyle.restaurants)
+        // const res = jsData.data.cards.filter((val: Object) => {
 
-            const a = val.card.card.info
-            if (a) {
-                return true
-            } else {
-                return false
-            }
-        }).map((val) => val.card.card.info)
+        //     const a = val.card.card.info
+        //     if (a) {
+        //         return true
+        //     } else {
+        //         return false
+        //     }
+        // }).map((val) => val.card.card.info)
+        const res = jsData.data.cards[1].card.card.gridElements.infoWithStyle.restaurants.map((val: Object): Object => val?.info)
 
         setRestoState(res)
         console.log('the data ', res)
