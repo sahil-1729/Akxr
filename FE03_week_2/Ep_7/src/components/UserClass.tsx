@@ -9,13 +9,33 @@ class UserClass extends React.Component {
     constructor(props) {
         super(props)
         console.log(props)
+
+        // this.state = {
+        //     count: 0
+        // }
+        // to add another state variable, we dont write like this 
+        // this.state1 = {
+        //     count: 0
+        // }
+        // instead we declare all the state variables in this.state itself
+        this.state = {
+            count: 0,
+            count2: 8
+        }
     }
+
+    // when we are loading the components of class, means we are creating instance of class 
+    // to create state variables we declare it in constructor  
 
     render() {
         const { name } = this.props
+        const { count, count2 } = this.state
         return (<div>
             Userclass <br />
             {name}
+            <br />
+            {count}
+            {count2}
         </div>)
     }
 }
