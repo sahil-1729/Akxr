@@ -1,0 +1,3 @@
+- Each component that we create should have single responsibility
+- if doing multiple things in component, we should break it down in multiple components
+- modularity is we breaking down components into smaller moduls
