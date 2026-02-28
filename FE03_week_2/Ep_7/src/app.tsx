@@ -1,4 +1,4 @@
-import React from "react";
+import React, { lazy } from "react";
 import ReactDOM from "react-dom/client";
 import { JSX } from "react/jsx-runtime";
 import Header from "./components/Header";
@@ -14,6 +14,8 @@ const a = React.createElement("div", {}, "Namaste BRO");
 // console.log(a);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
+
+const Grocery = lazy(() => import("./components/Grocery"))
 
 const AppLayout = (): JSX.Element => {
   return (
@@ -40,6 +42,10 @@ const appRouter = createBrowserRouter([
       {
         path: "contact",
         element: <Contact />
+      },
+      {
+        path: "grocery",
+        element: <Grocery />
       },
       {
         path: "restaurants/:resId",

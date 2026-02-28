@@ -15,6 +15,7 @@ const Header = (): JSX.Element => {
                 <ul>
                     <Link to="/about">About us</Link>
                     <Link to="/contact">Contact us</Link>
+                    <Link to="/grocery">Grocery</Link>
                     <li>Home</li>
                     <li>Cart</li>
                     <button onClick={() => {

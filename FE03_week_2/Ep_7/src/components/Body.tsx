@@ -2,6 +2,7 @@ import RestaurantCard from "./RestaurantCard"
 import restoList from "../utils/restoList"
 import { useEffect, useState } from "react"
 import Shimmer from "./Shimmer"
+import useOnlineStatus from "../utils/useOnlineStatus"
 
 const Body = () => {
     let resto = restoList.data.data.cards[0].card.card.gridElements.infoWithStyle.restaurants
@@ -35,6 +36,11 @@ const Body = () => {
 
     const [restoState, setRestoState] = useState([])
     const [searchTxt, setSearchTxt] = useState("")
+
+    const onlineStatus = useOnlineStatus()
+    if (onlineStatus === false) {
+        return <h1>Looks like you are offline! Please check your internet connection</h1>
+    }
 
     // what is conditional rendering 
     if (restoState.length === 0) {
