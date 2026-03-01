@@ -69,16 +69,18 @@ const Body = () => {
 
             }} className="filter-btn">Top Rated Restaurants</button>
         </div>
-        <div className="res-container">
+        <div className="res-container flex flex-wrap">
             {/* resName and cuisine are props, we are passing props(properties) */}
             {/* <RestaurantCard resName="Meghana foods" cuisine="Biryani, North Indian, Asian" /> */}
             {restoState.map((value, key) => {
-
+                console.log(value)
                 return <RestaurantCard key={value.id}
                     id={value.id}
-                    resName={name}
+                    resName={value.name}
                     cuisine={value.cuisines.toString()}
-                    rating={value.avgRating} />
+                    rating={value.avgRating}
+                    imgId={value.cloudinaryImageId}
+                />
             })}
 
         </div>

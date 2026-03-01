@@ -13,18 +13,28 @@ const styleCard = {
 }
 
 // or we can write like this, destructuring it 
-const RestaurantCard = ({ resName, cuisine, rating, id }: { resName?: string, cuisine?: string, rating?: number, id: number }): JSX.Element => {
+const RestaurantCard = ({ resName, cuisine, rating, id, imgId }: { resName?: string, cuisine?: string, rating?: number, id: number, imgId: string }): JSX.Element => {
     // props.resName
     // props.cuisine
 
-    return (<div className="res-card" style={styleCard}>
+    // https://media-assets.swiggy.com/swiggy/image/upload/
 
-        <img className="res-logo"
-            src={LOGO_URL} />
-        <Link to={`restaurants/${id}`}> <h3>
-            {resName}
-        </h3>
-            <h4>{cuisine}</h4>
+    const cuisineArr = cuisine?.split(',')
+
+    return (<div className="res-card m-4 p-4 bg-[#f0f0f0f0] w-56 rounded-lg" style={styleCard}>
+
+        <img className="res-logo rounded-md"
+            src={`https://media-assets.swiggy.com/swiggy/image/upload/${imgId}`} alt="image nai mil rha " />
+        <Link to={`restaurants/${id}`}>
+            <h3 className="font-bold py-4 text-lg">
+                {resName}
+            </h3>
+
+            <h4 className="text-wrap">
+                {cuisineArr?.map(val => {
+                    return val + ", "
+                })}
+            </h4>
         </Link>
         <h4>{rating} stars</h4>
         <h4>38 minutes</h4>
