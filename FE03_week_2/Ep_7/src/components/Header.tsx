@@ -22,6 +22,9 @@ const Header = (): JSX.Element => {
                     <li className='px-4'>
                         <Link to="/grocery">Grocery</Link>
                     </li>
+                    <li className='px-4'>
+                        <Link to="/instamart">Instamart</Link>
+                    </li>
                     <li className='px-4'>Home</li>
                     <li className='px-4'>Cart</li>
                     <button onClick={() => {

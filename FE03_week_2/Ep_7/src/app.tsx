@@ -8,6 +8,7 @@ import About from "./components/About"
 import Contact from "./components/Contact";
 import Error from "./components/Error"
 import RestaurantMenu from "./components/RestarauntMenu";
+import Instamart from "./components/Instamart";
 
 // create react element, hwihc is an obj
 const a = React.createElement("div", {}, "Namaste BRO");
@@ -42,6 +43,10 @@ const appRouter = createBrowserRouter([
       {
         path: "contact",
         element: <Contact />
+      },
+      {
+        path: "instamart",
+        element: <Instamart />
       },
       {
         path: "grocery",
