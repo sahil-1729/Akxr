@@ -9,8 +9,11 @@ import Contact from "./components/Contact";
 import Error from "./components/Error"
 import RestaurantMenu from "./components/RestarauntMenu";
 import Instamart from "./components/Instamart";
+import UserContext from "./utils/userContext";
+import { Provider } from "react-redux";
+import store from "./utils/store";
 
-// create react element, hwihc is an obj
+// create react element, which is an obj
 const a = React.createElement("div", {}, "Namaste BRO");
 // console.log(a);
 
@@ -20,10 +23,21 @@ const Grocery = lazy(() => import("./components/Grocery"))
 
 const AppLayout = (): JSX.Element => {
   return (
-    <div className="app">
-      <Header />
-      <Outlet />
-    </div>
+    <Provider store={store}>
+      <UserContext.Provider value={{
+        user: {
+          name: "Dummy",
+          email: "dummy@gmail.com"
+        }
+      }}>
+        <div className="app">
+          <Header />
+          <Outlet />
+        </div>
+      </UserContext.Provider>
+
+    </Provider>
+
   );
 };
 
