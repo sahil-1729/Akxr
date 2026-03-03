@@ -1,8 +1,12 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { Link } from 'react-router-dom';
+import UserContext from '../utils/userContext';
 
 const Header = (): JSX.Element => {
     const [btnName, setBtnName] = useState("Login")
+
+    const { user } = useContext(UserContext)
+
     return (
         <div className="header flex justify-between bg-pink-100 shadow-lg">
             <div className="logo-container">
@@ -27,6 +31,9 @@ const Header = (): JSX.Element => {
                     </li>
                     <li className='px-4'>Home</li>
                     <li className='px-4'>Cart</li>
+                    <span className='font-bold text-red-900'>
+                        {user?.name}
+                    </span>
                     <button onClick={() => {
 
                         btnName === "Logout" ? setBtnName("Login") : setBtnName("Logout")
