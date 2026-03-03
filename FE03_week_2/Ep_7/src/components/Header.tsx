@@ -1,11 +1,13 @@
 import { useContext, useState } from 'react'
 import { Link } from 'react-router-dom';
 import UserContext from '../utils/userContext';
+import { useSelector } from 'react-redux';
 
 const Header = (): JSX.Element => {
     const [btnName, setBtnName] = useState("Login")
 
     const { user } = useContext(UserContext)
+    const cardItems = useSelector(store => store.cart.items)
 
     return (
         <div className="header flex justify-between bg-pink-100 shadow-lg">
@@ -30,7 +32,7 @@ const Header = (): JSX.Element => {
                         <Link to="/instamart">Instamart</Link>
                     </li>
                     <li className='px-4'>Home</li>
-                    <li className='px-4'>Cart</li>
+                    <li className='px-4'>Cart - {cardItems.length}</li>
                     <span className='font-bold text-red-900'>
                         {user?.name}
                     </span>
