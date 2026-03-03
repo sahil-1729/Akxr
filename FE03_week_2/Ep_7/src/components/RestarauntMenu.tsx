@@ -10,8 +10,9 @@ const RestaurantMenu = () => {
 
     const dispatch = useDispatch()
 
-    const handleAddItem = () => {
-        dispatch(addItem("abcd"))
+    const addFoodItem = (item) => {
+        // here when item is added, react adds the item in obj format like this {payload : "abcd"}
+        dispatch(addItem(item))
     }
 
 
@@ -30,7 +31,10 @@ const RestaurantMenu = () => {
     }
     const { name, cuisines, city, avgRating, cloudinaryImageId, costForTwo } = resInfo[2]?.card?.card?.info
     const { categories } = resInfo[4]?.groupedCard?.cardGroupMap.REGULAR?.cards[7].card.card
-    console.log(categories)
+    // console.log("!", resInfo[4].groupedCard?.cardGroupMap.REGULAR?.cards[2], resInfo[4].groupedCard?.cardGroupMap.REGULAR?.cards[3])
+    const menuVegList = resInfo[4].groupedCard?.cardGroupMap.REGULAR?.cards[2].card.card.itemCards.map((val) => val.card.info)
+
+
     return (
         <div>
             <img src={`https://media-assets.swiggy.com/swiggy/image/upload/${cloudinaryImageId}`} />
@@ -49,15 +53,10 @@ const RestaurantMenu = () => {
             <h1>
                 {costForTwo}
             </h1>
-            <div>
-                <button className="p-2 m-4 bg-green-100" onClick={() => handleAddItem()}>
-                    Add Item
-                </button>
-            </div>
-            {categories[0].itemCards.map(val => {
-                const { name, id } = val.card.info
+            {menuVegList.map(val => {
+                const { name, id } = val
                 console.log(id)
-                return (<h3 key={id}>{name}</h3>)
+                return (<h3 key={id}>{name} - <button className="p-1 bg-green-50" onClick={() => addFoodItem(val)}>Add</button> </h3>)
             })}
         </div>
     )
