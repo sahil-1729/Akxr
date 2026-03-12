@@ -42,3 +42,81 @@ function getSearchProducts<T>(products: T[]): T {
 const getSearchProducts1 = <T>(products: T[]): T => {
   return products[0];
 };
+
+// we can add more, as much as possible like t, u
+function anotheFunction<t, u>(valOne: t, valTwo: u): object {
+  return {
+    valOne,
+    valTwo,
+  };
+}
+
+interface Database {
+  connection: string;
+  username: string;
+  password: string;
+}
+
+// here the u says ki u has to be of database type only
+function anotheFunction1<t, u extends Database>(valOne: t, valTwo: u): object {
+  return {
+    valOne,
+    valTwo,
+  };
+}
+// isme error ayega as "d" isnt type Database
+// anotheFunction1(1,"d")
+
+interface Quiz {
+  name: string;
+  type: string;
+}
+
+interface Course {
+  name: string;
+  author: string;
+  subject: string;
+}
+
+// <> matlab ki use of generic
+class Sellable<T> {
+  public cart: T[] = [];
+  addToCart(product: T) {
+    this.cart.push(product);
+  }
+}
+
+// when we do this it prints object, which should have ideally been array same for null
+// console.log(typeof [1,2,3])
+
+function detectType(val: number | string) {
+  if (typeof val === "string") {
+    return val.toLowerCase();
+  }
+  return val + 3;
+}
+
+// what would you do when there's array? along with number and string? 
+function detectType1(val: number | string | number[]) {
+  if (typeof val === "string") {
+    return val.toLowerCase();
+  }
+  return val + 3;
+}
+
+function provideId(id:string | null){
+    if(!id){
+        console.error("fo")
+    }
+}
+
+// we can use instanceOf to check if a variable is instance of a object or array or ... 
+
+interface Circle{
+  kind: "circle",
+  radius: number
+}
+interface {
+  kind: "circle",
+  radius: number
+}
