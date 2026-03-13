@@ -12,7 +12,7 @@ const Body = () => {
     const a = async () => {
         const data = await fetch("https://foodfire.onrender.com/api/restaurants?lat=21.1702401&lng=72.83106070000001&page_type=DESKTOP_WEB_LISTING")
         const jsData = await data.json()
-        console.log(jsData.data.cards[1].card.card.gridElements.infoWithStyle.restaurants)
+        // console.log(jsData.data.cards[1].card.card.gridElements.infoWithStyle.restaurants)
         // const res = jsData.data.cards.filter((val: Object) => {
 
         //     const a = val.card.card.info
@@ -73,7 +73,7 @@ const Body = () => {
             {/* resName and cuisine are props, we are passing props(properties) */}
             {/* <RestaurantCard resName="Meghana foods" cuisine="Biryani, North Indian, Asian" /> */}
             {restoState.map((value, key) => {
-                console.log(value)
+                // console.log(value)
                 return <RestaurantCard key={value.id}
                     id={value.id}
                     resName={value.name}
