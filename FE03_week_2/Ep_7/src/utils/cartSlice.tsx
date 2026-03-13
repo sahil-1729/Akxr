@@ -6,7 +6,7 @@ const cartSlice = createSlice({
     name: "card",
     // the initial state 
     initialState: {
-        items: ["a", 1]
+        items: []
     },
     reducers: {
         // it takes 2 parameters, state is the initialState at start, e.g when user clicks on button, and when dispatcher calls action which maps to the reducer function, 
