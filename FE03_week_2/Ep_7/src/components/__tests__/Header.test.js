@@ -19,7 +19,7 @@ test('Header should load on rendering', () => {
 
     const logo = header.getAllByTestId("logo")
     // here also virtual DOM element is printed 
-    console.log('LOGO ', logo[0].src)
+    // console.log('LOGO ', logo[0].src)
 
     expect(logo[0].src).toBe("https://cdn.dribbble.com/userupload/16778067/file/original-d75cb39663149843b1572e4cc64681fe.jpg?resize=400x0")
     //   load Header 
@@ -42,10 +42,12 @@ test('Header should have 0 cart items on rendering', () => {
 
     const cart = header.getByTestId("cart")
     // here also virtual DOM element is printed 
-    console.log('cart ',cart.innerHTML)
+    // console.log('cart ',cart.innerHTML)
 
     expect(cart.innerHTML).toBe("Cart - 0")
-    //   load Header 
-    // render the header 
-    // check if logo is missing 
+    
+
+    // to see the entire html of the header, do this, i.e name any random id that doesn't exist 
+    // const cart = header.getByTestId("cart1")
+    // console.log(cart)
 })
