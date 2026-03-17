@@ -17,10 +17,17 @@ const Login = () => {
             <Header />
             <form className='absolute bg-black w-3/12 right-0 left-0 my-36 mx-auto p-12 text-white bg-opacity-70 rounded-md'>
                 <h1 className='text-3xl font-bold'>{isSignIn ? "Sign in" : "Sign up"}</h1>
+
+                {!isSignIn ?
+                    <input type='text' placeholder='Enter your name' className='p-4 my-4 w-full bg-[#151010] rounded-lg' />
+                    :
+                    ""}
+
                 <input type='text' placeholder='Enter your email' className='p-4 my-4 w-full bg-[#151010] rounded-lg' />
+
                 <input type='text' placeholder='Enter your password' className='p-4 my-4 w-full bg-[#151010] rounded-lg' />
                 <button className='p-4 my-6 w-full bg-red-700 rounded-lg'>{isSignIn ? "Sign in" : "Sign up"}</button>
-                <p className='py-4' onClick={() => { toggleSignIn() }}>New to Netflix? Sign up Now</p>
+                <p className='py-4 cursor-pointer' onClick={() => { toggleSignIn() }}>{isSignIn ? "New to Netflix? Sign up Now" : "Already registered? sign in now"}</p>
             </form>
         </div>
     )
