@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Header from './Header'
+import { checkValidateData } from '../utils/validate'
 
 const Login = () => {
 
@@ -7,6 +8,12 @@ const Login = () => {
     const toggleSignIn = () => {
         const val = !isSignIn
         setIsSignIn(val)
+    }
+
+    const handleButtonClick = ()=>{
+        // one of the ways to get the inputs like the email and password is to make use of useState and all, but there are the other ways 
+        // one of the ways being making use of useRef 
+        // checkValidateData()
     }
 
     return (
@@ -26,7 +33,9 @@ const Login = () => {
                 <input type='text' placeholder='Enter your email' className='p-4 my-4 w-full bg-[#151010] rounded-lg' />
 
                 <input type='text' placeholder='Enter your password' className='p-4 my-4 w-full bg-[#151010] rounded-lg' />
-                <button className='p-4 my-6 w-full bg-red-700 rounded-lg'>{isSignIn ? "Sign in" : "Sign up"}</button>
+                <button className='p-4 my-6 w-full bg-red-700 rounded-lg' onClick={()=>{
+                    handleButtonClick()
+                }}>{isSignIn ? "Sign in" : "Sign up"}</button>
                 <p className='py-4 cursor-pointer' onClick={() => { toggleSignIn() }}>{isSignIn ? "New to Netflix? Sign up Now" : "Already registered? sign in now"}</p>
             </form>
         </div>
