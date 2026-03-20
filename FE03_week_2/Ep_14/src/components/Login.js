@@ -1,6 +1,8 @@
 import React, { useState, useRef } from 'react'
 import Header from './Header'
 import { checkValidateData } from '../utils/validate'
+import { auth } from '../utils/firebase'
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 
 const Login = () => {
 
@@ -18,8 +20,41 @@ const Login = () => {
     const handleButtonClick = () => {
         // one of the ways to get the inputs like the email and password is to make use of useState and all, but there are the other ways 
         // one of the ways being making use of useRef 
-        const val = checkValidateData(email.current.value,password.current.value)
+        const val = checkValidateData(email.current.value, password.current.value)
         setErrorMsg(val)
+
+        if (val) {
+            return
+        }
+
+        if (!isSignIn) {
+
+            createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
+                .then((userCredential) => {
+                    const user = userCredential.user;
+                    console.log('signed up user ', user)
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    setErrorMsg(errorCode, " - ", errorMessage)
+                });
+
+        } else {
+
+            signInWithEmailAndPassword(auth, email.current.value, password.current.value)
+                .then((userCredential) => {
+                    const user = userCredential.user;
+                    console.log("sign in ", user)
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    setErrorMsg(errorCode, " - ", errorMessage)
+                });
+
+        }
+
     }
 
     return (
