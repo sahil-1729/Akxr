@@ -2,7 +2,8 @@ import React, { useState, useRef } from 'react'
 import Header from './Header'
 import { checkValidateData } from '../utils/validate'
 import { auth } from '../utils/firebase'
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
 
@@ -11,6 +12,9 @@ const Login = () => {
 
     const email = useRef(null)
     const password = useRef(null)
+    const name = useRef(null)
+
+    const navigate = useNavigate()
 
     const toggleSignIn = () => {
         const val = !isSignIn
@@ -32,6 +36,15 @@ const Login = () => {
             createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
                 .then((userCredential) => {
                     const user = userCredential.user;
+
+                    updateProfile(auth.currentUser, {
+                        displayName: name.current.value, photoURL: "https://example.com/jane-q-user/profile.jpg"
+                    }).then(() => {
+                        navigate("/browse")
+                    }).catch((error) => {
+                        setErrorMsg(error.message)
+                    });
+
                     console.log('signed up user ', user)
                 })
                 .catch((error) => {
@@ -46,6 +59,8 @@ const Login = () => {
                 .then((userCredential) => {
                     const user = userCredential.user;
                     console.log("sign in ", user)
+                    navigate("/browse")
+
                 })
                 .catch((error) => {
                     const errorCode = error.code;
@@ -70,7 +85,7 @@ const Login = () => {
                 <h1 className='text-3xl font-bold'>{isSignIn ? "Sign in" : "Sign up"}</h1>
 
                 {!isSignIn ?
-                    <input type='text' placeholder='Enter your name' className='p-4 my-4 w-full bg-[#151010] rounded-lg' />
+                    <input type='text' placeholder='Enter your name' className='p-4 my-4 w-full bg-[#151010] rounded-lg' ref={name} />
                     :
                     ""}
 

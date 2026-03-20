@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import Login from './Login'
 import Browse from './Browse'
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from '../utils/firebase';
 import { addUser, removeUser } from '../utils/userSlice';
@@ -26,11 +26,14 @@ const Body = () => {
 
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        const { uid } = user.uid;
-        console.log(uid)
-        dispatch(addUser({ uid: uid }))
+        const { uid, email, displayName } = user;
+        const val = { uid: uid, email: email, displayName: displayName }
+        console.log("onAuthStateChange called ",val)
+
+        dispatch(addUser(val))
       } else {
-        dispatch((removeUser))
+        console.log("remove user")
+        dispatch((removeUser()))
       }
     });
   }, [])
