@@ -24,6 +24,8 @@ const Body = () => {
 
   useEffect(() => {
 
+    // useNavigate ko yahape use nai kar sakte bc Body component me we are using Router, so the router things will be applied to the children of the Body tag
+    // not on the body tag
     onAuthStateChanged(auth, (user) => {
       if (user) {
         const { uid, email, displayName } = user;

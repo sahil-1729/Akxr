@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import netflixUserIcon from "../assets/img/netflixUserIcon.webp"
 import { signOut } from "firebase/auth";
 import { auth } from '../utils/firebase';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeUser } from '../utils/userSlice';
+import { onAuthStateChanged } from "firebase/auth";
+import { addUser } from '../utils/userSlice';
 
 const Header = () => {
   const navigate = useNavigate()
@@ -12,6 +14,28 @@ const Header = () => {
   console.log('user ', user)
 
   const dispatch = useDispatch()
+
+  useEffect(() => {
+
+    // useNavigate ko yahape use nai kar sakte bc Body component me we are using Router, so the router things will be applied to the children of the Body tag
+    // not on the body tag
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const { uid, email, displayName } = user;
+        const val = { uid: uid, email: email, displayName: displayName }
+        console.log("onAuthStateChange called ", val)
+
+        dispatch(addUser(val))
+        navigate("/browse")
+      } else {
+        console.log("remove user")
+        dispatch((removeUser()))
+        navigate("/")
+      }
+    })
+
+    return () => unsubscribe()
+  }, []);
 
   const handleSignOut = () => {
     signOut(auth).then(() => {
