@@ -23,12 +23,12 @@ const Header = () => {
       if (user) {
         const { uid, email, displayName } = user;
         const val = { uid: uid, email: email, displayName: displayName }
-        console.log("onAuthStateChange called ", val)
+        // console.log("onAuthStateChange called ", val)
 
         dispatch(addUser(val))
         navigate("/browse")
       } else {
-        console.log("remove user")
+        // console.log("remove user")
         dispatch((removeUser()))
         navigate("/")
       }

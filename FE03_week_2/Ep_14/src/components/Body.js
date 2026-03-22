@@ -30,7 +30,7 @@ const Body = () => {
       if (user) {
         const { uid, email, displayName } = user;
         const val = { uid: uid, email: email, displayName: displayName }
-        console.log("onAuthStateChange called ",val)
+        // console.log("onAuthStateChange called ",val)
 
         dispatch(addUser(val))
       } else {

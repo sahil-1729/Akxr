@@ -10,7 +10,7 @@ const MainContainer = () => {
         return
     }
     const firstMovie = movies[0]
-    console.log('first movie ', firstMovie)
+    // console.log('first movie ', firstMovie)
 
     const { original_title, overview, id } = firstMovie
     

@@ -16,7 +16,7 @@ const useMovieTrailer = (movieId) => {
             return val.type === "Trailer"
         })
         const trailer = trailerVideo ? trailerVideo[0] : json.results[0]
-        console.log(trailerVideo[0])
+        // console.log(trailerVideo[0])
         dispatch(addTrailerVideo(trailer))
     }
 
