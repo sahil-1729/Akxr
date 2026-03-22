@@ -11,7 +11,7 @@ const VideoTitle = ({ original_title, overview }) => {
         {overview}
       </p>
       <div>
-        <button className='bg-gray-500 text-black p-4 px-12 text-lg bg-opacity-50 rounded-md m-2'>Play</button>
+        <button className='bg-gray-500 text-black p-4 px-12 text-lg bg-opacity-50 rounded-md m-2'>▶️ Play</button>
         <button className='bg-gray-500 text-black p-4 px-12 text-lg bg-opacity-50 rounded-md m-2'>More info</button>
       </div>
     </div>
