@@ -7,9 +7,17 @@ const SecondaryContainer = () => {
     // console.log(moviesList)
 
     return (
-        <div>
-            <MovieList title={"Now Playing"} moviesList={moviesList} />
+        moviesList
+        &&
+        <div className='bg-black'>
+            <div className='-mt-40 pl-12 relative z-20'>
+                <MovieList title={"Now Playing"} moviesList={moviesList} />
+                <MovieList title={"Trending"} moviesList={moviesList} />
+                <MovieList title={"Popular"} moviesList={moviesList} />
+                <MovieList title={"Upcoming Movies"} moviesList={moviesList} />
+            </div>
         </div>
+
     )
 }
 
