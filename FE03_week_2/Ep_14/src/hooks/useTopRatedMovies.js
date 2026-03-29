@@ -1,25 +1,25 @@
 import { useDispatch } from "react-redux";
 import { API_OPTIONS } from "../utils/constants";
 import { useEffect } from "react";
-import { addPopularMovies } from "../utils/movieSlice";
+import { addTopRatedMovies } from "../utils/movieSlice";
 
-const usePopularMovies = () => {
+const useTopRatedMovies = () => {
 
     const dispatch = useDispatch()
     // let user = useSelector((store) => console.log('movies ', store.movies));
 
 
-    const getPopularMovies = async () => {
-        const data = await fetch('https://api.themoviedb.org/3/movie/popular', API_OPTIONS)
+    const getTopRatedMovies = async () => {
+        const data = await fetch('https://api.themoviedb.org/3/movie/top_rated', API_OPTIONS)
 
         const { results } = await data.json()
-        // console.log(results)
+        // console.log("TOP RATED ",results)
 
-        dispatch(addPopularMovies(results))
+        dispatch(addTopRatedMovies(results))
     }
 
     useEffect(() => {
-        getPopularMovies()
+        getTopRatedMovies()
         // return () => {
 
         // };
@@ -27,4 +27,4 @@ const usePopularMovies = () => {
 
 }
 
-export default usePopularMovies
+export default useTopRatedMovies

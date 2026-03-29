@@ -1,13 +1,11 @@
 import React from 'react'
 import { useSelector } from "react-redux";
 import useMovieTrailer from "../hooks/useMovieTrailer"
-import useNowPlayingMovies from '../hooks/usePopularMovies';
 
 const VideoBackground = ({ movieId }) => {
 
   const trailerId = useSelector(store => store.movies?.trailerVideo?.key)
   useMovieTrailer(movieId)
-  useNowPlayingMovies(movieId)
   // console.log('movie Id ', movieId, " ", trailerId)
 
   return (
