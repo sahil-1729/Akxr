@@ -22,7 +22,7 @@ const MainContainer = () => {
         })
         // console.log(backupTrailerVideo)
         if (!backupTrailerVideo.length > 0) {
-            const a = movies[1]
+            const a = movies[movies.length-1 ]
             setFirstMovie(a)
             // console.log("executing ... ", firstMovie)
             return 
