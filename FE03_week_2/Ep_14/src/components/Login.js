@@ -4,6 +4,7 @@ import { checkValidateData } from '../utils/validate'
 import { auth } from '../utils/firebase'
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useNavigate } from 'react-router-dom';
+import { BG_URL } from '../utils/constants';
 
 const Login = () => {
 
@@ -75,7 +76,7 @@ const Login = () => {
     return (
         <div>
             <div className='absolute'>
-                <img src='https://assets.nflxext.com/ffe/siteui/vlv3/eb110559-67e9-40ec-8f1c-4a45b9f9c9bb/web/IN-en-20260309-TRIFECTA-perspective_6796824d-3538-42c9-95e0-baabc0fdbadf_large.jpg' alt='image not found' />
+                <img src={BG_URL} alt='not found' />
             </div>
             <Header />
             <form className='absolute bg-black w-3/12 right-0 left-0 my-36 mx-auto p-12 text-white bg-opacity-70 rounded-md' onSubmit={(e) => {
