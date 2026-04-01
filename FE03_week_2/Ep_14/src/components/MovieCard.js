@@ -8,7 +8,7 @@ const MovieCard = ({ posterPath }) => {
   }
 
   return (
-    <div className='w-48 pr-4'>
+    <div className='md:w-48 w-36 pr-4'>
       <img src={IMG_CDN.replace("/{POSTER_PATH}", posterPath)} alt='movie card' />
     </div>
   )

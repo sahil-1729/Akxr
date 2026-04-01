@@ -11,7 +11,7 @@ const MovieList = ({ title, moviesList }) => {
     moviesList
     &&
     <div className='flex flex-col px-6 w-full'>
-      <h1 className='text-3xl py-4 text-white'>
+      <h1 className='md:text-3xl text-lg py-4 text-white'>
         {title}
       </h1>
 

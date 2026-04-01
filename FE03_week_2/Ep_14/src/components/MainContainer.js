@@ -22,17 +22,17 @@ const MainContainer = () => {
         })
         // console.log(backupTrailerVideo)
         if (!backupTrailerVideo.length > 0) {
-            const a = movies[movies.length-1 ]
+            const a = movies[movies.length - 1]
             setFirstMovie(a)
             // console.log("executing ... ", firstMovie)
-            return 
+            return
         }
         setFirstMovie(movies[0])
     }
 
     return (
-        firstMovie && <div>
-            <VideoTitle original_title={firstMovie.original_title} overview={firstMovie.overview}/>
+        firstMovie && <div className='bg-black md:pt-0 pt-[30%]'>
+            <VideoTitle original_title={firstMovie.original_title} overview={firstMovie.overview} />
             <VideoBackground movieId={firstMovie.id} />
         </div>
     )

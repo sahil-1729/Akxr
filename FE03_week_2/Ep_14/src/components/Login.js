@@ -76,10 +76,10 @@ const Login = () => {
     return (
         <div>
             <div className='absolute'>
-                <img src={BG_URL} alt='not found' />
+                <img className='h-screen object-cover' src={BG_URL} alt='not found' />
             </div>
             <Header />
-            <form className='absolute bg-black w-3/12 right-0 left-0 my-36 mx-auto p-12 text-white bg-opacity-70 rounded-md' onSubmit={(e) => {
+            <form className='absolute bg-black md:w-3/12 w-full right-0 left-0 my-36 mx-auto p-12 text-white bg-opacity-70 rounded-md' onSubmit={(e) => {
                 e.preventDefault()
             }
             }>
